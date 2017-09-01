@@ -16,9 +16,14 @@ import "GimliToken.sol";
 contract GimliCrowdsale is SafeMath, GimliToken {
 
     /// @notice `msg.sender` invest `msg.value`
+    // BK Ok - Default function, payable, receives the participant's contributions
     function() payable {
+        // BK Ok - Participant must send non-zero value
         require(msg.value > 0);
         // check date
+        // BK NOTE - The block times are increasing due to the "ice age" difficulty adjustment
+        // BK NOTE - You many want to consider comparing `block.timestamp` to a start and end timestamp
+        // BK Ok 
         require(block.number >= CROWDSALE_START_BLOCK && block.number <= CROWDSALE_END_BLOCK);
 
         // calculate and check quantity
@@ -31,24 +36,36 @@ contract GimliCrowdsale is SafeMath, GimliToken {
         balances[msg.sender] = safeAdd(balances[msg.sender], quantity);
         soldAmount = safeAdd(soldAmount, quantity);
 
+        // BK Ok - Log event
         Transfer(this, msg.sender, quantity);
+        // BK NOTE - Transfer `msg.value` directly to the wallet, e.g. `crowdsaleWallet.transfer(msg.value);`
     }
 
     /// @notice returns non-sold tokens to owner
     function closeCrowdsale() onlyOwner {
         // check date
+        // BK NOTE - Consider adding a additional criteria to allow the crowdsale to be closed if the cap is reached
+        // BK NOTE - This is when balances[this] == 0
+        // BK Ok 
         require(block.number > CROWDSALE_END_BLOCK);
 
         // update balances
+        // BK Ok
         uint256 unsoldQuantity = balances[this];
+        // BK Ok - Transfer unsold tokens to the owner
         balances[owner] = safeAdd(balances[owner], unsoldQuantity);
+        // BK Ok
         balances[this] = 0;
 
+        // BK Ok
         Transfer(this, owner, unsoldQuantity);
     }
 
     /// @notice Send GML payments  to `_to`
     /// @param _to The withdrawal destination
+    // BK NOTE - This function will be obsolete if the ethers are transferred directly to the crowdsale wallet 
+    // BK NOTE - in the default function
+    // BK Ok - Only owner can withdraw
     function withdrawalCrowdsale(address _to) onlyOwner {
         _to.transfer(this.balance);
     }
