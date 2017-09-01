@@ -13,7 +13,7 @@ contract GimliCrowdsale is SafeMath, GimliToken {
         require(block.number >= CROWDSALE_START_BLOCK && block.number <= CROWDSALE_END_BLOCK);
 
         // calculate and check quantity
-        uint256 quantity = safeDiv(msg.value, CROWDSALE_PRICE);
+        uint256 quantity = safeMul(msg.value, CROWDSALE_PRICE);
         if (safeSub(balances[this], quantity) < 0)
             return;
 
@@ -53,5 +53,19 @@ contract GimliCrowdsale is SafeMath, GimliToken {
         balances[_to] = safeAdd(balances[_to], _value);
         balances[this] = safeSub(balances[this], _value);
         soldAmount = safeAdd(soldAmount, _value);
+    }
+
+    /// @notice Send vested amount to _destination
+    /// @param _destination The address of the recipient
+    /// @return Whether the release was successful or not
+    function releaseVesting(address _destination) onlyOwner returns (bool success) {
+        if (block.number > VESTING_1_BLOCK && vesting1Withdrawn == false) {
+            balances[_destination] = safeAdd(balances[_destination], VESTING_1_AMOUNT);
+            vesting1Withdrawn = true;
+        }
+        if (block.number > VESTING_2_BLOCK && vesting2Withdrawn == false) {
+            balances[_destination] = safeAdd(balances[_destination], VESTING_2_AMOUNT);
+            vesting2Withdrawn = true;
+        }
     }
 }
