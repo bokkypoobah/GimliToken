@@ -56,6 +56,8 @@ Status: Work in progress
   done in `Ownable.Ownable()`, and *Gimli* is derived from *Ownable*
 * **LOW IMPORTANCE** `GimliCrowdsale.withdrawalCrowdsale(...)` can be removed if `GimliCrowdsale.function ()` transfers
   the conributed ethers to the crowdsale wallet
+* **LOW IMPORTANCE** Increase the minimum Solidity version number from ^0.4.11. Review the bugfixes in the Solidity
+  [releases](https://github.com/ethereum/solidity/releases) list
 
 <br />
 
