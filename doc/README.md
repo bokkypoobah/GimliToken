@@ -42,11 +42,11 @@ authorize an address to create Gimli game (bet, vote, etc.)
 
 **Parameters:**
 
-  - `_streamerFeesPpm`: Share of fees for the streamer (ppm, ex: 5 for 0.5%)
-  - `_streamerAddress`: Authorized address
   - `_contractAddress`: Contract address (GimliBetting, GimliVoting, etc.)
+  - `_streamerFeesPpm`: Share of fees for the streamer (ppm, ex: 5 for 0.5%)
   - `_gimliFeesPpm`: Share of fees for Gimli (ppm, ex: 5 for 0.5%)
   - `_maxAmount`: The maximum fee or escrow a Streamer can claim to users for a game
+  - `_streamerAddress`: Authorized address
 
 ### `balanceOf(address)`
 
@@ -68,9 +68,9 @@ Called by a Gimli contract to claim game payment
 
 **Parameters:**
 
-  - `_streamerAddress`: Streamer address who created the game
   - `_amount`: Price paid by `_userAddress`
   - `_userAddress`: User address who pays the game
+  - `_streamerAddress`: Streamer address who created the game
 
 ### `escrowGML(address,address,uint256)`
 
@@ -80,9 +80,9 @@ Called by a Gimli contract to put GML in escrow, for instance by GimliBetting wh
 
 **Parameters:**
 
-  - `_streamerAddress`: Streamer address who created the game
   - `_amount`: Amount put in escrow
   - `_userAddress`: User address who pays the game
+  - `_streamerAddress`: Streamer address who created the game
 
 ### `getContractPermissions(address,address)`
 
@@ -90,8 +90,8 @@ Get information about a contract authorized for a streamer
 
 **Parameters:**
 
-  - `_streamerAddress`: The streamer address
   - `_contractAddress`: The contract address
+  - `_streamerAddress`: The streamer address
 
 **Returns:**
 
@@ -165,8 +165,8 @@ send `_value` token to `_to` from `_from` on the condition it is approved by `_f
 
 **Parameters:**
 
-  - `_from`: The address of the sender
   - `_to`: The address of the recipient
+  - `_from`: The address of the sender
   - `_value`: The amount of token to be transferred
 
 **Returns:**
@@ -180,12 +180,4 @@ Transfer ownership from `owner` to `newOwner`
 **Parameters:**
 
   - `newOwner`: The new contract owner
-
-### `withdrawalCrowdsale(address)`
-
-Send GML payments  to `_to`
-
-**Parameters:**
-
-  - `_to`: The withdrawal destination
 

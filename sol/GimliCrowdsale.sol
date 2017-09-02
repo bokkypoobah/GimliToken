@@ -8,6 +8,8 @@ contract GimliCrowdsale is SafeMath, GimliToken {
 
     /// @notice `msg.sender` invest `msg.value`
     function() payable {
+        require(!crowdsaleCanceled);
+
         require(msg.value > 0);
         // check date
         require(block.number >= CROWDSALE_START_BLOCK && block.number <= CROWDSALE_END_BLOCK);
@@ -16,6 +18,8 @@ contract GimliCrowdsale is SafeMath, GimliToken {
         uint256 quantity = safeMul(msg.value, CROWDSALE_PRICE);
         if (safeSub(balances[this], quantity) < 0)
             return;
+
+        require(MULTISIG_WALLET_ADDRESS.send(msg.value));
 
         // update balances
         balances[this] = safeSub(balances[this], quantity);
@@ -26,22 +30,20 @@ contract GimliCrowdsale is SafeMath, GimliToken {
     }
 
     /// @notice returns non-sold tokens to owner
-    function closeCrowdsale() onlyOwner {
+    function  transferAnyERC20Token() onlyOwner {
         // check date
-        require(block.number > CROWDSALE_END_BLOCK);
+        require(block.number > CROWDSALE_END_BLOCK || crowdsaleCanceled);
 
         // update balances
-        uint256 unsoldQuantity = balances[this];
-        balances[owner] = safeAdd(balances[owner], unsoldQuantity);
+        uint256 amount = balances[this];
+        balances[owner] = safeAdd(balances[owner], amount);
         balances[this] = 0;
 
-        Transfer(this, owner, unsoldQuantity);
+        Transfer(this, owner, amount);
     }
 
-    /// @notice Send GML payments  to `_to`
-    /// @param _to The withdrawal destination
-    function withdrawalCrowdsale(address _to) onlyOwner {
-        _to.transfer(this.balance);
+    function cancelCrowdsale() onlyOwner {
+        crowdsaleCanceled = true;
     }
 
     /// @notice Pre-allocate tokens to advisor or partner
