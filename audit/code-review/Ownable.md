@@ -16,33 +16,27 @@ pragma solidity ^0.4.11;
 // BK NOTE - Use the `acceptOwnership(...)` pattern to transfer ownership safely
 // BK Ok
 contract Ownable {
-  // BK Ok
-  address public owner;
+    // BK Ok
+    address public owner;
 
-  // BK Ok - Constructor
-  function Ownable() {
     // BK Ok
-    owner = msg.sender;
-  }
-
-  // BK Ok
-  modifier onlyOwner() {
-    // BK Ok
-    require(msg.sender == owner);
-    // BK Ok
-    _;
-  }
-
-  /// @notice Transfer ownership from `owner` to `newOwner`
-  /// @param newOwner The new contract owner
-  // BK Ok - Only the current owner can execute this function
-  function transferOwnership(address newOwner) onlyOwner {
-    // BK Ok
-    if (newOwner != address(0)) {
-      // BK Ok
-      owner = newOwner;
+    modifier onlyOwner() {
+        // BK Ok
+        require(msg.sender == owner);
+        // BK Ok
+        _;
     }
-  }
+
+    /// @notice Transfer ownership from `owner` to `newOwner`
+    /// @param newOwner The new contract owner
+    // BK Ok - Only the current owner can execute this function
+    function transferOwnership(address newOwner) onlyOwner {
+        // BK Ok
+        if (newOwner != address(0)) {
+            // BK Ok
+            owner = newOwner;
+        }
+    }
 
 }
 

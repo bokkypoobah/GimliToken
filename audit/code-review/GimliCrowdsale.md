@@ -18,6 +18,9 @@ contract GimliCrowdsale is SafeMath, GimliToken {
     /// @notice `msg.sender` invest `msg.value`
     // BK Ok - Default function, payable, receives the participant's contributions
     function() payable {
+        // BK Ok
+        require(!crowdsaleCanceled);
+
         // BK Ok - Participant must send non-zero value
         require(msg.value > 0);
         // check date
@@ -31,6 +34,9 @@ contract GimliCrowdsale is SafeMath, GimliToken {
         if (safeSub(balances[this], quantity) < 0)
             return;
 
+        // BK Ok
+        require(MULTISIG_WALLET_ADDRESS.send(msg.value));
+
         // update balances
         balances[this] = safeSub(balances[this], quantity);
         balances[msg.sender] = safeAdd(balances[msg.sender], quantity);
@@ -42,32 +48,28 @@ contract GimliCrowdsale is SafeMath, GimliToken {
     }
 
     /// @notice returns non-sold tokens to owner
-    function closeCrowdsale() onlyOwner {
+    // BK NOTE - The name of this function should be finalise()
+    function  transferAnyERC20Token() onlyOwner {
         // check date
         // BK NOTE - Consider adding a additional criteria to allow the crowdsale to be closed if the cap is reached
         // BK NOTE - This is when balances[this] == 0
         // BK Ok 
-        require(block.number > CROWDSALE_END_BLOCK);
+        require(block.number > CROWDSALE_END_BLOCK || crowdsaleCanceled);
 
         // update balances
         // BK Ok
-        uint256 unsoldQuantity = balances[this];
+        uint256 amount = balances[this];
         // BK Ok - Transfer unsold tokens to the owner
-        balances[owner] = safeAdd(balances[owner], unsoldQuantity);
+        balances[owner] = safeAdd(balances[owner], amount);
         // BK Ok
         balances[this] = 0;
 
         // BK Ok
-        Transfer(this, owner, unsoldQuantity);
+        Transfer(this, owner, amount);
     }
 
-    /// @notice Send GML payments  to `_to`
-    /// @param _to The withdrawal destination
-    // BK NOTE - This function will be obsolete if the ethers are transferred directly to the crowdsale wallet 
-    // BK NOTE - in the default function
-    // BK Ok - Only owner can withdraw
-    function withdrawalCrowdsale(address _to) onlyOwner {
-        _to.transfer(this.balance);
+    function cancelCrowdsale() onlyOwner {
+        crowdsaleCanceled = true;
     }
 
     /// @notice Pre-allocate tokens to advisor or partner

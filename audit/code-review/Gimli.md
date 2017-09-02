@@ -21,12 +21,12 @@ contract Gimli is GimliStreamers, GimliCrowdsale {
     /// @notice Gimli Contract constructor. `msg.sender` is the owner.
     // BK Ok - Constructor
     function Gimli() {
+        // BK NOTE - The following comment is incorrect
         // `msg.sender` becomes the owner
-        // BK NOTE - The following statement is not required as Ownable.Ownable() will assign this variable
-        owner = msg.sender;
+        owner = MULTISIG_WALLET_ADDRESS;
         // Give the creator initial tokens
         // BK Ok - Owner has TOTAL_SUPPLY - CROWDSALE_AMOUNT - VESTING_1_AMOUNT - VESTING_2_AMOUNT
-        balances[msg.sender] = safeAdd(balances[msg.sender], TOTAL_SUPPLY - CROWDSALE_AMOUNT - VESTING_1_AMOUNT - VESTING_2_AMOUNT);
+        balances[owner] = safeAdd(balances[owner], TOTAL_SUPPLY - CROWDSALE_AMOUNT - VESTING_1_AMOUNT - VESTING_2_AMOUNT);
         // Give the contract crowdsale amount
         // BK Ok - This contract has CROWDSALE_AMOUNT
         balances[this] = CROWDSALE_AMOUNT;

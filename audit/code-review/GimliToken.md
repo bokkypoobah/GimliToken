@@ -23,6 +23,8 @@ contract GimliToken is ERC20, SafeMath, Ownable {
     /*************************
     **** Global variables ****
     *************************/
+    // BK Ok
+    address public constant MULTISIG_WALLET_ADDRESS = 0xcac029186c773dbfc18402f464a3818e46541fba; // TODO
 
     // crowdsale
     // BK Ok
@@ -45,20 +47,23 @@ contract GimliToken is ERC20, SafeMath, Ownable {
     bool public vesting1Withdrawn = false;
     // BK Ok
     bool public vesting2Withdrawn = false;
+    // BK NOTE - This should really be crowdsaleCompleted
+    bool public crowdsaleCanceled = false;
     // BK Ok
     uint256 public soldAmount;
 
-    /// total amount of tokens
-    // BK NOTE - The following should be `name` instead of `NAME`
-    string public constant NAME = "Gimli Token";
-    // BK NOTE - The following should be `symbol` instead of `SYMBOL`
-    string public constant SYMBOL = "GIM";
     // BK Ok
-    string public constant VERSION = 'v1';
+    uint8 public constant decimals = 8;
+    // BK Ok
+    string public constant name = "Gimli Token";
+    // BK Ok
+    string public constant symbol = "GIM";
+    // BK NOTE - Incorrect spelling
+    string public constant versoin = 'v1';
 
     /// total amount of tokens
     // BK Ok
-    uint256 public constant UNIT = 10**8;
+    uint256 public constant UNIT = 10**decimals;
     // BK Ok
     uint256 constant MILLION_GML = 10**6 * UNIT; // can't use `safeMul` with constant
     /// Should include CROWDSALE_AMOUNT and VESTING_X_AMOUNT
@@ -73,16 +78,6 @@ contract GimliToken is ERC20, SafeMath, Ownable {
     // BK Ok
     mapping (address => mapping (address => uint256)) allowed;
 
-
-    /***************
-    **** Events ****
-    ***************/
-
-    // BK NOTE - The next 2 events are already defined in ERC20Basic and ERC20, without `_` prefixes in the parameters
-    event Transfer(address indexed _from, address indexed _to, uint256 _value);
-    event Approval(address indexed _owner, address indexed _spender, uint256 _value);
-
-
     /*********************
     **** Transactions ****
     *********************/
@@ -92,16 +87,16 @@ contract GimliToken is ERC20, SafeMath, Ownable {
     /// @param _to The address of the recipient
     /// @param _value The amount of token to be transferred
     /// @return Whether the transfer was successful or not
-    // BK NOTE - Add return status to this function
-    function transfer(address _to, uint256 _value) {
+    // BK Ok
+    function transfer(address _to, uint256 _value) returns (bool success) {
         // BK Ok
         require(block.number > CROWDSALE_END_BLOCK);
 
         // BK NOTE - _value can be == 0 but cannot be < 0 as it is an unsigned integer
         // BK Ok
         if (balances[msg.sender] < _value || _value <= 0)
-            // BK NOTE - Return false (but some token contracts return true if _value == 0
-            return;
+            // BK Ok
+            return false;
 
         // BK Ok
         balances[msg.sender] = safeSub(balances[msg.sender], _value);
@@ -109,6 +104,9 @@ contract GimliToken is ERC20, SafeMath, Ownable {
         balances[_to] = safeAdd(balances[_to], _value);
         // BK Ok - Log event
         Transfer(msg.sender, _to, _value);
+
+        // BK Ok
+        return true;
     }
 
     /// @notice send `_value` token to `_to` from `_from` on the condition it is approved by `_from`
@@ -116,16 +114,16 @@ contract GimliToken is ERC20, SafeMath, Ownable {
     /// @param _to The address of the recipient
     /// @param _value The amount of token to be transferred
     /// @return Whether the transfer was successful or not
-    // BK NOTE - Add return status to this function
-    function transferFrom(address _from, address _to, uint256 _value) {
+    // BK Ok
+    function transferFrom(address _from, address _to, uint256 _value) returns (bool success) {
         // BK Ok
         require(block.number > CROWDSALE_END_BLOCK);
 
         // BK NOTE - _value can be == 0 but cannot be < 0 as it is an unsigned integer
         // BK Ok
         if (balances[_from] < _value || allowed[_from][msg.sender] < _value || _value <= 0)
-            // BK NOTE - Return false (but some token contracts return true if _value == 0
-            return;
+            // BK Ok
+            return false;
         // BK Ok
         balances[_from] = safeSub(balances[_from], _value);
         // BK Ok
@@ -134,6 +132,9 @@ contract GimliToken is ERC20, SafeMath, Ownable {
         allowed[_from][msg.sender] = safeSub(allowed[_from][msg.sender], _value);
         // BK Ok - Log event
         Transfer(_from, _to, _value);
+
+        // BK Ok
+        return true;
     }
 
     /// @notice `msg.sender` approves `_spender` to spend `_value` tokens
@@ -176,8 +177,8 @@ contract GimliToken is ERC20, SafeMath, Ownable {
     /// @return Amount of remaining tokens allowed to spent
     // BK Ok
     function allowance(address _owner, address _spender) constant returns (uint256 remaining) {
-      // BK Ok - Should indent by 4 spaces to be consistent with general formatting
-      return allowed[_owner][_spender];
+        // BK Ok
+        return allowed[_owner][_spender];
     }
 
 }

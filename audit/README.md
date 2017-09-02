@@ -6,6 +6,9 @@ Status: Work in progress
 
 `TODO`
 
+Commits [18b26f3](https://github.com/thegimliproject/GimliToken/commit/18b26f346bc9a4e393e65f919736c55a210a1371) and
+[a4f962f](https://github.com/thegimliproject/GimliToken/commit/a4f962f98672067ef0ff40c87d2d0ecbcd30ae82).
+
 <br />
 
 <hr />
@@ -25,39 +28,72 @@ Status: Work in progress
 * **HIGH IMPORTANCE** There is no minimum funding goal and no refunds that have to be provided back to the 
   crowdsale participants if the minimum funding goal is not reached. `GimliCrowdsale.function ()` should
   transfer any ethers it receives directly into the crowdsale wallet
+  * [x] Fixed in [a4f962f](https://github.com/thegimliproject/GimliToken/commit/a4f962f98672067ef0ff40c87d2d0ecbcd30ae82)
 * **MEDIUM IMPORTANCE** `uint8 public decimals = {x}` should be defined in *GimliToken*
+  * [x] Fixed in [a4f962f](https://github.com/thegimliproject/GimliToken/commit/a4f962f98672067ef0ff40c87d2d0ecbcd30ae82)
 * **MEDIUM IMPORTANCE** `NAME` should be renamed to `name` in *GimliToken*
+  * [x] Fixed in [a4f962f](https://github.com/thegimliproject/GimliToken/commit/a4f962f98672067ef0ff40c87d2d0ecbcd30ae82)
 * **MEDIUM IMPORTANCE** `SYMBOL` should be renamed to `symbol` in *GimliToken*
+  * [x] Fixed in [a4f962f](https://github.com/thegimliproject/GimliToken/commit/a4f962f98672067ef0ff40c87d2d0ecbcd30ae82)
 * **MEDIUM IMPORTANCE** `ERC20Basic.transfer(...)` should have a `returns (bool success)` return code as defined in 
   the [ERC20](https://github.com/ethereum/EIPs/issues/20) standard. `GimliToken.transfer(...)` should 
   return true/false
+  * [x] Fixed in [a4f962f](https://github.com/thegimliproject/GimliToken/commit/a4f962f98672067ef0ff40c87d2d0ecbcd30ae82)
 * **MEDIUM IMPORTANCE** `ERC20.transferFrom(...)` should have a `returns (bool success)` return code as defined in 
   the [ERC20](https://github.com/ethereum/EIPs/issues/20) standard. `GimliToken.transferFrom(...)` should
   return true/false
+  * [x] Fixed in [a4f962f](https://github.com/thegimliproject/GimliToken/commit/a4f962f98672067ef0ff40c87d2d0ecbcd30ae82)
 * **MEDIUM IMPORTANCE** Consider adding a check to `GimliCrowdsale.closeCrowdsale()` to allow this function to be
   executed before the crowdsale ends if the crowdsale is sold out
+* **MEDIUM IMPORTANCE** The current `GimliCrowdsale.transferAnyERC20Token(...)` should be renamed to `finalise()` or
+  something similar to that
 * **MEDIUM IMPORTANCE** Consider adding a function like [`transferAnyERC20Token(...)`](https://github.com/openanx/OpenANXToken/blob/master/contracts/OpenANXToken.sol#L454-L458)
-  that allows the owner to extract any ERC20 tokens transferred to the crowdsale contract. Note that the crowdsale
-  contract "parks" the tokens to be sold during the crowdsale at the contract address
+  that allows the owner to extract any **non-Gimli** ERC20 tokens transferred to the crowdsale contract. Note that the
+  crowdsale contract "parks" the tokens to be sold during the crowdsale at the contract address so this function should
+  only be executable after the crowdsale has completed
 * **LOW IMPORTANCE** Use the `acceptOwnership(...)` pattern in the *Ownable* contract to transfer ownership safely.
   See [example](https://github.com/openanx/OpenANXToken/blob/master/contracts/Owned.sol#L51-L55)
 * **LOW IMPORTANCE** `event Transfer(...)` and `event Approval(...)` in *GimliToken* is already defined in *ERC20Basic*
   and *ERC20* respectively
+  * [x] Fixed in [a4f962f](https://github.com/thegimliproject/GimliToken/commit/a4f962f98672067ef0ff40c87d2d0ecbcd30ae82)
 * **LOW IMPORTANCE** Indentation should be consistently 4 spaces - see `GimliToken.allowance(...)`
+  * [x] Fixed in [a4f962f](https://github.com/thegimliproject/GimliToken/commit/a4f962f98672067ef0ff40c87d2d0ecbcd30ae82)
 * **LOW IMPORTANCE** There is a mix of `uint` and `uint256` across the different contracts. Use one or the other consistently
 * **LOW IMPORTANCE** Move crowdsale related constants and variables from *GimliToken* to *GimliCrowdsale*. The only crowdsale
   information you need *GimliToken* is a status of whether the tokens are transferable. Create a `bool public transferable`
   in *GimliToken* and add `require(transferable)` instead of `require(block.number > CROWDSALE_END_BLOCK);`.
-  In *GimliCrowdsale.closeCrowdsale()`, set `transferable = true;`
+  In `GimliCrowdsale.closeCrowdsale()`, set `transferable = true;`
 * **LOW IMPORTANCE** The crowdsale start and end dates are defined by start and stop blocknumbers. Consider using
   `block.timestamp` and compare these against the start and stop Unix timestamps. This provides potential participants
   more certainty of the start and end of the crowdsale
 * **LOW IMPORTANCE** The assignment `owner = msg.sender;` in `Gimli.Gimli()` is not required as the assignment is already
   done in `Ownable.Ownable()`, and *Gimli* is derived from *Ownable*
+  * [x] Fixed in [a4f962f](https://github.com/thegimliproject/GimliToken/commit/a4f962f98672067ef0ff40c87d2d0ecbcd30ae82)
 * **LOW IMPORTANCE** `GimliCrowdsale.withdrawalCrowdsale(...)` can be removed if `GimliCrowdsale.function ()` transfers
   the conributed ethers to the crowdsale wallet
+  * [x] Fixed in [a4f962f](https://github.com/thegimliproject/GimliToken/commit/a4f962f98672067ef0ff40c87d2d0ecbcd30ae82)
 * **LOW IMPORTANCE** Increase the minimum Solidity version number from ^0.4.11. Review the bugfixes in the Solidity
   [releases](https://github.com/ethereum/solidity/releases) list
+* **LOW IMPORTANCE** Incorrect comment in *Gimli*
+* **LOW IMPORTANCE** `GimliToken.versoin` should be spelled `GimliToken.version` or `GimliToken.VERSION`
+* **LOW IMPORTANCE** In *GimliToken*, the address `0xcac029186c773dbfc18402f464a3818e46541fba` should be specified in the
+  checksummed format `0xcAc029186c773DbFc18402f464a3818e46541fbA` to avoid the following error message:
+
+      GimliToken.sol:14:55: Warning: This looks like an address but has an invalid checksum. If this is not used as an address, please prepend '00'.
+          address public constant MULTISIG_WALLET_ADDRESS = 0xcac029186c773dbfc18402f464a3818e46541fba; // TODO
+                                                            ^----------------------------------------^
+* **MEDIUM IMPORTANCE** In *GimliToken*, `10**decimals` should be specified as `10**uint256(decimals)` to avoid the
+  following error message:
+
+      GimliToken.sol:36:36: Warning: Result of exponentiation has type uint8 and thus might overflow. Silence this warning by converting the literal to the expected type.
+          uint256 public constant UNIT = 10**decimals;
+                                         ^----------^
+
+* **LOW IMPORTANCE** In *GimliToken*, a return status should be returned from the function `releaseVesting(...)`:
+
+      GimliCrowdsale.sol:63:70: Warning: Unused local variable
+          function releaseVesting(address _destination) onlyOwner returns (bool success) {
+                                                                           ^----------^
 
 <br />
 
