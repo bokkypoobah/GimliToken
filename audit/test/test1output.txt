@@ -1,0 +1,355 @@
+MODE            = 'test'
+GETHATTACHPOINT = 'ipc:./testchain/geth.ipc'
+PASSWORD        = 'testtest'
+SOURCEDIR       = '../../sol'
+TOKENSOL        = 'GimliToken.sol'
+CROWDSALESOL    = 'Gimli.sol'
+CROWDSALEJS     = 'Gimli.js'
+DEPLOYMENTDATA  = 'deploymentData.txt'
+INCLUDEJS       = './include.js'
+TEST1OUTPUT     = 'test1output.txt'
+TEST1RESULTS    = 'test1results.txt'
+CURRENTBLOCK    = '287'
+STARTBLOCK      = '302'
+ENDBLOCK        = '312'
+VEST1BLOCK      = '322'
+VEST2BLOCK      = '327'
+CURRENTTIME     = '1504429594' 'Sun  3 Sep 2017 09:06:34 UTC'
+STARTTIME       = '1504429684' 'Sun  3 Sep 2017 09:08:04 UTC'
+ENDTIME         = '1504429894' 'Sun  3 Sep 2017 09:11:34 UTC'
+--- Differences ../../sol/GimliToken.sol GimliToken.sol ---
+14c14
+<     address public constant MULTISIG_WALLET_ADDRESS = 0xcac029186c773dbfc18402f464a3818e46541fba; // TODO
+---
+>     address public constant MULTISIG_WALLET_ADDRESS = 0xa22AB8A9D641CE77e06D98b7D7065d324D3d6976; // TODO
+18,19c18,19
+<     uint256 public constant CROWDSALE_START_BLOCK = 4278234; // Around 11AM GMT on 9/16/17
+<     uint256 public constant CROWDSALE_END_BLOCK = 4328345; // Around 11PM GMT on 9/30/17
+---
+>     uint256 public constant CROWDSALE_START_BLOCK = 302; // Around 11AM GMT on 9/16/17
+>     uint256 public constant CROWDSALE_END_BLOCK = 312; // Around 11PM GMT on 9/30/17
+22c22
+<     uint256 public constant VESTING_1_BLOCK = 5539673; // Around start + 1 year
+---
+>     uint256 public constant VESTING_1_BLOCK = 322; // Around start + 1 year
+24c24
+<     uint256 public constant VESTING_2_BLOCK = 6801113; // Around start + 2 years
+---
+>     uint256 public constant VESTING_2_BLOCK = 327; // Around start + 2 years
+36c36
+<     uint256 public constant UNIT = 10**decimals;
+---
+>     uint256 public constant UNIT = 10**uint256(decimals);
+--- Differences ../../sol/GimliCrowdsale.sol GimliCrowdsale.sol ---
+18c18
+<         uint256 quantity = safeMul(msg.value, CROWDSALE_PRICE);
+---
+>         uint256 quantity = safeDiv(safeMul(msg.value, CROWDSALE_PRICE), 10**(18-uint256(decimals)));
+--- Differences ../../sol/Gimli.sol Gimli.sol ---
+
+Welcome to the Geth JavaScript console!
+
+instance: Geth/v1.6.7-stable-ab5646c5/darwin-amd64/go1.8.3
+coinbase: 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e
+at block: 287 (Sun, 03 Sep 2017 19:06:32 AEST)
+ datadir: /Users/bok/Projects/GimliTokenContractAudit/audit/test/testchain
+ modules: admin:1.0 debug:1.0 eth:1.0 miner:1.0 net:1.0 personal:1.0 rpc:1.0 txpool:1.0 web3:1.0
+
+> 
+true
+> 
+true
+> 
+> 
+undefined
+> 
+undefined
+> 
+> 
+undefined
+> 
+undefined
+> 
+> 
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                Token Name
+RESULT: -- ------------------------------------------ --------------------------- -------------------- ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       15.000000000000000000           0.00000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.000000000000000000           0.00000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.00000000 Account #2 - Wallet
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.00000000 Account #3 - Prealloc
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.00000000 Account #4 - Prealloc
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.00000000 Account #5
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.00000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.00000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.00000000 Account #8
+RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.00000000 Account #9
+RESULT: -- ------------------------------------------ --------------------------- -------------------- ---------------------------
+RESULT:                                                                                     0.00000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- -------------------- ---------------------------
+RESULT: 
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+RESULT: Deploy Crowdsale/Token Contract
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+> 
+... 
+...... 
+......... 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+............ 
+......... 
+...... 
+... 
+undefined
+> 
+> 
+... 
+undefined
+> 
+> 
+DATA: tokenAddress=0xdf9f36fd5654d92e0844c78d2d2dd562404cd1ff
+RESULT: tokenAddress=0xdf9f36fd5654d92e0844c78d2d2dd562404cd1ff gas=6000000 gasUsed=1979070 costETH=0.03562326 costUSD=13.5507318714 @ ETH/USD=380.39 gasPrice=18000000000 block=292 txId=0xf722c653d063aab6693ebe31c0ce83f54510801ab66b88de66a9d62fced6074d
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                Token Name
+RESULT: -- ------------------------------------------ --------------------------- -------------------- ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       25.035623260000000000           0.00000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.035623260000000000           0.00000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000    40000000.00000000 Account #2 - Wallet
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.00000000 Account #3 - Prealloc
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.00000000 Account #4 - Prealloc
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.00000000 Account #5
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.00000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.00000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.00000000 Account #8
+RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.00000000 Account #9
+RESULT: 10 0xdf9f36fd5654d92e0844c78d2d2dd562404cd1ff        0.000000000000000000    80000000.00000000 Token 'GIM' 'Gimli Token'
+RESULT: -- ------------------------------------------ --------------------------- -------------------- ---------------------------
+RESULT:                                                                             120000000.00000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- -------------------- ---------------------------
+RESULT: 
+undefined
+> 
+RESULT: PASS Deploy Crowdsale/Token Contract
+1
+> 
+RESULT: tokenContractAddress=0xdf9f36fd5654d92e0844c78d2d2dd562404cd1ff
+RESULT: token.owner=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: token.MULTISIG_WALLET_ADDRESS=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: token.symbol=GIM
+RESULT: token.name=Gimli Token
+RESULT: token.versoin(sic)=v1
+RESULT: token.decimals=8
+RESULT: token.totalSupply=150000000
+RESULT: token.CROWDSALE_START_BLOCK=302
+RESULT: token.CROWDSALE_END_BLOCK=312
+RESULT: token.VESTING_1_BLOCK=322
+RESULT: token.VESTING_2_BLOCK=327
+RESULT: token.CROWDSALE_PRICE=700
+RESULT: token.TOTAL_SUPPLY=150000000
+RESULT: token.CROWDSALE_AMOUNT=80000000
+RESULT: token.VESTING_1_AMOUNT=15000000
+RESULT: token.VESTING_2_AMOUNT=15000000
+RESULT: token.vesting1Withdrawn=false
+RESULT: token.vesting2Withdrawn=false
+RESULT: token.crowdsaleCanceled=false
+RESULT: token.soldAmount=0
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+RESULT: Add Preallocations
+undefined
+> 
+undefined
+> 
+undefined
+> 
+... 
+undefined
+> 
+RESULT: preAlloc1Tx gas=400000 gasUsed=69995 costETH=0.00125991 costUSD=0.4792571649 @ ETH/USD=380.39 gasPrice=18000000000 block=294 txId=0x8381a6c6bda1e775f5d764061417b95a34a99f22322baa2eecf5723fb8e27d71
+undefined
+> 
+RESULT: preAlloc2Tx gas=400000 gasUsed=54995 costETH=0.00098991 costUSD=0.3765518649 @ ETH/USD=380.39 gasPrice=18000000000 block=294 txId=0x2bb766b64c8c30994b19a250fc5b48a8524abd775de89389cc8a9eeca8d9238f
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                Token Name
+RESULT: -- ------------------------------------------ --------------------------- -------------------- ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       35.037873080000000000           0.00000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.035623260000000000           0.00000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976       -0.002249820000000000    40000000.00000000 Account #2 - Wallet
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000        1000.00000000 Account #3 - Prealloc
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000       10000.00000000 Account #4 - Prealloc
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.00000000 Account #5
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.00000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.00000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.00000000 Account #8
+RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.00000000 Account #9
+RESULT: 10 0xdf9f36fd5654d92e0844c78d2d2dd562404cd1ff        0.000000000000000000    79989000.00000000 Token 'GIM' 'Gimli Token'
+RESULT: -- ------------------------------------------ --------------------------- -------------------- ---------------------------
+RESULT:                                                                             120000000.00000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- -------------------- ---------------------------
+RESULT: 
+undefined
+> 
+RESULT: PASS Add Preallocations - ac3 1,000 GIM
+1
+> 
+RESULT: PASS Add Preallocations - ac4 10,000 GIM
+1
+> 
+RESULT: tokenContractAddress=0xdf9f36fd5654d92e0844c78d2d2dd562404cd1ff
+RESULT: token.owner=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: token.MULTISIG_WALLET_ADDRESS=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: token.symbol=GIM
+RESULT: token.name=Gimli Token
+RESULT: token.versoin(sic)=v1
+RESULT: token.decimals=8
+RESULT: token.totalSupply=150000000
+RESULT: token.CROWDSALE_START_BLOCK=302
+RESULT: token.CROWDSALE_END_BLOCK=312
+RESULT: token.VESTING_1_BLOCK=322
+RESULT: token.VESTING_2_BLOCK=327
+RESULT: token.CROWDSALE_PRICE=700
+RESULT: token.TOTAL_SUPPLY=150000000
+RESULT: token.CROWDSALE_AMOUNT=80000000
+RESULT: token.VESTING_1_AMOUNT=15000000
+RESULT: token.VESTING_2_AMOUNT=15000000
+RESULT: token.vesting1Withdrawn=false
+RESULT: token.vesting2Withdrawn=false
+RESULT: token.crowdsaleCanceled=false
+RESULT: token.soldAmount=11000
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+RESULT: Waiting until startBlock #302 currentBlock=297
+undefined
+> 
+... 
+undefined
+> 
+RESULT: Waited until startBlock #302 currentBlock=303
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+> 
+undefined
+> 
+undefined
+> 
+undefined
+> 
+RESULT: Send Contribution
+undefined
+> 
+undefined
+> 
+... 
+undefined
+> 
+RESULT: sendContribution1Tx gas=400000 gasUsed=61451 costETH=0.001106118 costUSD=0.42075622602 @ ETH/USD=380.39 gasPrice=18000000000 block=305 txId=0x807bd90643166651dbed96e3533b66d6ba430bbe66647a99c8eb070d82f6ae73
+undefined
+> 
+RESULT:  # Account                                             EtherBalanceChange                Token Name
+RESULT: -- ------------------------------------------ --------------------------- -------------------- ---------------------------
+RESULT:  0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       90.038979198000000000           0.00000000 Account #0 - Miner
+RESULT:  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.035623260000000000           0.00000000 Account #1 - Contract Owner
+RESULT:  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        9.997750180000000000    40000000.00000000 Account #2 - Wallet
+RESULT:  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000        1000.00000000 Account #3 - Prealloc
+RESULT:  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000       10000.00000000 Account #4 - Prealloc
+RESULT:  5 0xa55a151eb00fded1634d27d1127b4be4627079ea      -10.001106118000000000        7000.00000000 Account #5
+RESULT:  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           0.00000000 Account #6
+RESULT:  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec        0.000000000000000000           0.00000000 Account #7
+RESULT:  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.00000000 Account #8
+RESULT:  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.00000000 Account #9
+RESULT: 10 0xdf9f36fd5654d92e0844c78d2d2dd562404cd1ff        0.000000000000000000    79982000.00000000 Token 'GIM' 'Gimli Token'
+RESULT: -- ------------------------------------------ --------------------------- -------------------- ---------------------------
+RESULT:                                                                             120000000.00000000 Total Token Balances
+RESULT: -- ------------------------------------------ --------------------------- -------------------- ---------------------------
+RESULT: 
+undefined
+> 
+RESULT: PASS Send Contribution - ac5 10 ETH = 7,000 GIM
+1
+> 
+RESULT: tokenContractAddress=0xdf9f36fd5654d92e0844c78d2d2dd562404cd1ff
+RESULT: token.owner=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: token.MULTISIG_WALLET_ADDRESS=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
+RESULT: token.symbol=GIM
+RESULT: token.name=Gimli Token
+RESULT: token.versoin(sic)=v1
+RESULT: token.decimals=8
+RESULT: token.totalSupply=150000000
+RESULT: token.CROWDSALE_START_BLOCK=302
+RESULT: token.CROWDSALE_END_BLOCK=312
+RESULT: token.VESTING_1_BLOCK=322
+RESULT: token.VESTING_2_BLOCK=327
+RESULT: token.CROWDSALE_PRICE=700
+RESULT: token.TOTAL_SUPPLY=150000000
+RESULT: token.CROWDSALE_AMOUNT=80000000
+RESULT: token.VESTING_1_AMOUNT=15000000
+RESULT: token.VESTING_2_AMOUNT=15000000
+RESULT: token.vesting1Withdrawn=false
+RESULT: token.vesting2Withdrawn=false
+RESULT: token.crowdsaleCanceled=false
+RESULT: token.soldAmount=18000
+RESULT: Transfer 0 #305: from=0xdf9f36fd5654d92e0844c78d2d2dd562404cd1ff to=0xa55a151eb00fded1634d27d1127b4be4627079ea value=7000
+undefined
+> 
+RESULT: 
+undefined
+> 
+> 
+> 
