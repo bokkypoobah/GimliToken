@@ -22,6 +22,7 @@ Target crowdsale commencement date Sep 16 2017
 * [Recommendations](#recommendations)
   * [Outstanding Recommendations](#outstanding-recommendations)
   * [Completed Recommendations](#completed-recommendations)
+* [Testing](#testing)
 * [Code Review](#code-review)
 * [References](#references)
 
@@ -36,6 +37,10 @@ Target crowdsale commencement date Sep 16 2017
 * **LOW IMPORTANCE** There is a mix of `uint` and `uint256` across the different contracts. Use one or the other consistently
 * **LOW IMPORTANCE** Increase the minimum Solidity version number from `^0.4.11` to `^0.4.16`. Review the bugfixes in
   the Solidity [releases](https://github.com/ethereum/solidity/releases) list to confirm your target version
+* **LOW IMPORTANCE** Call `safeSub(...)` to reduce token balance from the source account before calling 
+  `safeAdd(...)` to increase token balance for the destination account in *GimliToken* `preAllocate(...)` and
+  `releaseVesting(...)`
+* **LOW IMPORTANCE** Set `GimliToken.transferable` to be public
 
 <br />
 
@@ -146,6 +151,19 @@ Target crowdsale commencement date Sep 16 2017
                                                                            ^----------^
 
   * [x] Fixed in [baa8715](https://github.com/thegimliproject/GimliToken/commit/baa87152bf587c95c6d4dd2d96acca9db2bdc24c)
+
+<br />
+
+<hr />
+
+## Testing
+
+* Maximum funding not reached, wait until the end of the crowdsale to finalise
+  * Testing script [test/01_test1.sh](test/01_test1.sh)
+  * Testing results [test/test1results.txt](test/test1results.txt)
+* Maximum funding reached early, finalise crowdsale early
+  * Testing script [test/02_test2.sh](test/02_test2.sh)
+  * Testing results [test/test2results.txt](test/test2results.txt)
 
 <br />
 

@@ -16,7 +16,9 @@ addAccount(eth.accounts[5], "Account #5");
 addAccount(eth.accounts[6], "Account #6");
 addAccount(eth.accounts[7], "Account #7");
 addAccount(eth.accounts[8], "Account #8");
-addAccount(eth.accounts[9], "Account #9");
+addAccount(eth.accounts[9], "Account #9 - Vested 1 Tokens");
+addAccount(eth.accounts[10], "Account #10 - Vested 2 Tokens");
+addAccount("0xabcdefabcdefabcdefabcdefabcdefabcdefabcd", "Locked Tokens");
 
 
 var minerAccount = eth.accounts[0];
@@ -29,6 +31,7 @@ var account6 = eth.accounts[6];
 var account7 = eth.accounts[7];
 var account8 = eth.accounts[8];
 var account9 = eth.accounts[9];
+var account10 = eth.accounts[10];
 
 var baseBlock = eth.blockNumber;
 
@@ -190,13 +193,17 @@ function printTokenContractDetails() {
     console.log("RESULT: token.MULTISIG_WALLET_ADDRESS=" + contract.MULTISIG_WALLET_ADDRESS());
     console.log("RESULT: token.symbol=" + contract.symbol());
     console.log("RESULT: token.name=" + contract.name());
-    console.log("RESULT: token.versoin(sic)=" + contract.versoin());
+    console.log("RESULT: token.version=" + contract.version());
     console.log("RESULT: token.decimals=" + decimals);
     console.log("RESULT: token.totalSupply=" + contract.totalSupply().shift(-decimals));
-    console.log("RESULT: token.CROWDSALE_START_BLOCK=" + contract.CROWDSALE_START_BLOCK());
-    console.log("RESULT: token.CROWDSALE_END_BLOCK=" + contract.CROWDSALE_END_BLOCK());
-    console.log("RESULT: token.VESTING_1_BLOCK=" + contract.VESTING_1_BLOCK());
-    console.log("RESULT: token.VESTING_2_BLOCK=" + contract.VESTING_2_BLOCK());
+    var startDate = contract.START_DATE();
+    console.log("RESULT: token.START_DATE=" + startDate + " " + new Date(startDate * 1000).toUTCString());
+    var endDate = contract.END_DATE();
+    console.log("RESULT: token.END_DATE=" + endDate + " " + new Date(endDate * 1000).toUTCString());
+    var vesting1Date = contract.VESTING_1_DATE();
+    console.log("RESULT: token.VESTING_1_DATE=" + vesting1Date + " " + new Date(vesting1Date * 1000).toUTCString());
+    var vesting2Date = contract.VESTING_2_DATE();
+    console.log("RESULT: token.VESTING_2_DATE=" + vesting2Date + " " + new Date(vesting2Date * 1000).toUTCString());
     console.log("RESULT: token.CROWDSALE_PRICE=" + contract.CROWDSALE_PRICE());
     console.log("RESULT: token.TOTAL_SUPPLY=" + contract.TOTAL_SUPPLY().shift(-decimals));
     console.log("RESULT: token.CROWDSALE_AMOUNT=" + contract.CROWDSALE_AMOUNT().shift(-decimals));
@@ -206,9 +213,17 @@ function printTokenContractDetails() {
     console.log("RESULT: token.vesting2Withdrawn=" + contract.vesting2Withdrawn());
     console.log("RESULT: token.crowdsaleCanceled=" + contract.crowdsaleCanceled());
     console.log("RESULT: token.soldAmount=" + contract.soldAmount().shift(-decimals));
+    console.log("RESULT: token.transferable=" + contract.transferable());
 
     var latestBlock = eth.blockNumber;
     var i;
+
+    var ownershipTransferredEvent = contract.OwnershipTransferred({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
+    i = 0;
+    ownershipTransferredEvent.watch(function (error, result) {
+      console.log("RESULT: OwnershipTransferred " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
+    });
+    ownershipTransferredEvent.stopWatching();
 
     var adminstratorAddedEvent = contract.AdminstratorAdded({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
     i = 0;

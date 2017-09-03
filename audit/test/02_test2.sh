@@ -19,8 +19,8 @@ CROWDSALEJS=`grep ^CROWDSALEJS= settings.txt | sed "s/^.*=//"`
 DEPLOYMENTDATA=`grep ^DEPLOYMENTDATA= settings.txt | sed "s/^.*=//"`
 
 INCLUDEJS=`grep ^INCLUDEJS= settings.txt | sed "s/^.*=//"`
-TEST1OUTPUT=`grep ^TEST1OUTPUT= settings.txt | sed "s/^.*=//"`
-TEST1RESULTS=`grep ^TEST1RESULTS= settings.txt | sed "s/^.*=//"`
+TEST2OUTPUT=`grep ^TEST2OUTPUT= settings.txt | sed "s/^.*=//"`
+TEST2RESULTS=`grep ^TEST2RESULTS= settings.txt | sed "s/^.*=//"`
 
 CURRENTTIME=`date +%s`
 CURRENTTIMES=`date -r $CURRENTTIME -u`
@@ -42,22 +42,22 @@ VESTING1TIME_S=`date -r $VESTING1TIME -u`
 VESTING2TIME=`echo "$CURRENTTIME+60*5" | bc`
 VESTING2TIME_S=`date -r $VESTING2TIME -u`
 
-printf "MODE            = '$MODE'\n" | tee $TEST1OUTPUT
-printf "GETHATTACHPOINT = '$GETHATTACHPOINT'\n" | tee -a $TEST1OUTPUT
-printf "PASSWORD        = '$PASSWORD'\n" | tee -a $TEST1OUTPUT
-printf "SOURCEDIR       = '$SOURCEDIR'\n" | tee -a $TEST1OUTPUT
-printf "TOKENSOL        = '$TOKENSOL'\n" | tee -a $TEST1OUTPUT
-printf "CROWDSALESOL    = '$CROWDSALESOL'\n" | tee -a $TEST1OUTPUT
-printf "CROWDSALEJS     = '$CROWDSALEJS'\n" | tee -a $TEST1OUTPUT
-printf "DEPLOYMENTDATA  = '$DEPLOYMENTDATA'\n" | tee -a $TEST1OUTPUT
-printf "INCLUDEJS       = '$INCLUDEJS'\n" | tee -a $TEST1OUTPUT
-printf "TEST1OUTPUT     = '$TEST1OUTPUT'\n" | tee -a $TEST1OUTPUT
-printf "TEST1RESULTS    = '$TEST1RESULTS'\n" | tee -a $TEST1OUTPUT
-printf "CURRENTTIME     = '$CURRENTTIME' '$CURRENTTIMES'\n" | tee -a $TEST1OUTPUT
-printf "STARTTIME       = '$STARTTIME' '$STARTTIME_S'\n" | tee -a $TEST1OUTPUT
-printf "ENDTIME         = '$ENDTIME' '$ENDTIME_S'\n" | tee -a $TEST1OUTPUT
-printf "VESTING1TIME    = '$VESTING1TIME' '$VESTING1TIME_S'\n" | tee -a $TEST1OUTPUT
-printf "VESTING2TIME    = '$VESTING2TIME' '$VESTING2TIME_S'\n" | tee -a $TEST1OUTPUT
+printf "MODE            = '$MODE'\n" | tee $TEST2OUTPUT
+printf "GETHATTACHPOINT = '$GETHATTACHPOINT'\n" | tee -a $TEST2OUTPUT
+printf "PASSWORD        = '$PASSWORD'\n" | tee -a $TEST2OUTPUT
+printf "SOURCEDIR       = '$SOURCEDIR'\n" | tee -a $TEST2OUTPUT
+printf "TOKENSOL        = '$TOKENSOL'\n" | tee -a $TEST2OUTPUT
+printf "CROWDSALESOL    = '$CROWDSALESOL'\n" | tee -a $TEST2OUTPUT
+printf "CROWDSALEJS     = '$CROWDSALEJS'\n" | tee -a $TEST2OUTPUT
+printf "DEPLOYMENTDATA  = '$DEPLOYMENTDATA'\n" | tee -a $TEST2OUTPUT
+printf "INCLUDEJS       = '$INCLUDEJS'\n" | tee -a $TEST2OUTPUT
+printf "TEST2OUTPUT     = '$TEST2OUTPUT'\n" | tee -a $TEST2OUTPUT
+printf "TEST2RESULTS    = '$TEST2RESULTS'\n" | tee -a $TEST2OUTPUT
+printf "CURRENTTIME     = '$CURRENTTIME' '$CURRENTTIMES'\n" | tee -a $TEST2OUTPUT
+printf "STARTTIME       = '$STARTTIME' '$STARTTIME_S'\n" | tee -a $TEST2OUTPUT
+printf "ENDTIME         = '$ENDTIME' '$ENDTIME_S'\n" | tee -a $TEST2OUTPUT
+printf "VESTING1TIME    = '$VESTING1TIME' '$VESTING1TIME_S'\n" | tee -a $TEST2OUTPUT
+printf "VESTING2TIME    = '$VESTING2TIME' '$VESTING2TIME_S'\n" | tee -a $TEST2OUTPUT
 
 # Make copy of SOL file and modify start and end times ---
 `cp $SOURCEDIR/*.sol .`
@@ -71,20 +71,20 @@ printf "VESTING2TIME    = '$VESTING2TIME' '$VESTING2TIME_S'\n" | tee -a $TEST1OU
 `perl -pi -e "s/VESTING_2_DATE \= 1700000000;.*$/VESTING_2_DATE \= $VESTING2TIME; \/\/ $VESTING2TIME_S/" GimliCrowdsale.sol`
 
 DIFFS1=`diff $SOURCEDIR/$TOKENSOL $TOKENSOL`
-echo "--- Differences $SOURCEDIR/$TOKENSOL $TOKENSOL ---" | tee -a $TEST1OUTPUT
-echo "$DIFFS1" | tee -a $TEST1OUTPUT
+echo "--- Differences $SOURCEDIR/$TOKENSOL $TOKENSOL ---" | tee -a $TEST2OUTPUT
+echo "$DIFFS1" | tee -a $TEST2OUTPUT
 
 DIFFS1=`diff $SOURCEDIR/GimliCrowdsale.sol GimliCrowdsale.sol`
-echo "--- Differences $SOURCEDIR/GimliCrowdsale.sol GimliCrowdsale.sol ---" | tee -a $TEST1OUTPUT
-echo "$DIFFS1" | tee -a $TEST1OUTPUT
+echo "--- Differences $SOURCEDIR/GimliCrowdsale.sol GimliCrowdsale.sol ---" | tee -a $TEST2OUTPUT
+echo "$DIFFS1" | tee -a $TEST2OUTPUT
 
 DIFFS1=`diff $SOURCEDIR/$CROWDSALESOL $CROWDSALESOL`
-echo "--- Differences $SOURCEDIR/$CROWDSALESOL $CROWDSALESOL ---" | tee -a $TEST1OUTPUT
-echo "$DIFFS1" | tee -a $TEST1OUTPUT
+echo "--- Differences $SOURCEDIR/$CROWDSALESOL $CROWDSALESOL ---" | tee -a $TEST2OUTPUT
+echo "$DIFFS1" | tee -a $TEST2OUTPUT
 
 echo "var tokenOutput=`solc --optimize --combined-json abi,bin,interface $CROWDSALESOL`;" > $CROWDSALEJS
 
-geth --verbosity 3 attach $GETHATTACHPOINT << EOF | tee -a $TEST1OUTPUT
+geth --verbosity 3 attach $GETHATTACHPOINT << EOF | tee -a $TEST2OUTPUT
 loadScript("$CROWDSALEJS");
 loadScript("functions.js");
 
@@ -165,12 +165,12 @@ console.log("RESULT: Waited until start date at " + startTime + " " + startTimeD
 var sendContribution1Message = "Send Contribution";
 // -----------------------------------------------------------------------------
 console.log("RESULT: " + sendContribution1Message);
-var sendContribution1Tx = eth.sendTransaction({from: account5, to: tokenAddress, gas: 400000, value: web3.toWei("10", "ether")});
+var sendContribution1Tx = eth.sendTransaction({from: account5, to: tokenAddress, gas: 400000, value: web3.toWei("114270", "ether")});
 while (txpool.status.pending > 0) {
 }
 printTxData("sendContribution1Tx", sendContribution1Tx);
 printBalances();
-failIfGasEqualsGasUsed(sendContribution1Tx, sendContribution1Message + " - ac5 10 ETH = 7,000 GIM");
+failIfGasEqualsGasUsed(sendContribution1Tx, sendContribution1Message + " - ac5 114,270 ETH = 80,000,000 GIM");
 printTokenContractDetails();
 console.log("RESULT: ");
 
@@ -178,16 +178,16 @@ console.log("RESULT: ");
 // -----------------------------------------------------------------------------
 // Wait for crowdsale end
 // -----------------------------------------------------------------------------
-var endTime = parseInt(token.END_DATE()) + 1;
-var endTimeDate = new Date(endTime * 1000);
-console.log("RESULT: Waiting until end date at " + endTime + " " + endTimeDate + " currentDate=" + new Date());
-while ((new Date()).getTime() <= endTimeDate.getTime()) {
-}
-console.log("RESULT: Waited until end date at " + endTime + " " + endTimeDate + " currentDate=" + new Date());
+// var endTime = parseInt(token.END_DATE()) + 1;
+// var endTimeDate = new Date(endTime * 1000);
+// console.log("RESULT: Waiting until end date at " + endTime + " " + endTimeDate + " currentDate=" + new Date());
+// while ((new Date()).getTime() <= endTimeDate.getTime()) {
+// }
+// console.log("RESULT: Waited until end date at " + endTime + " " + endTimeDate + " currentDate=" + new Date());
 
 
 // -----------------------------------------------------------------------------
-var closeCrowdsaleMessage = "Close Crowdsale";
+var closeCrowdsaleMessage = "Close Crowdsale Early";
 // -----------------------------------------------------------------------------
 console.log("RESULT: " + closeCrowdsaleMessage);
 var closeCrowdsaleTx = token.closeCrowdsale({from: wallet, gas: 400000});
@@ -273,7 +273,7 @@ console.log("RESULT: ");
 
 
 EOF
-grep "DATA: " $TEST1OUTPUT | sed "s/DATA: //" > $DEPLOYMENTDATA
+grep "DATA: " $TEST2OUTPUT | sed "s/DATA: //" > $DEPLOYMENTDATA
 cat $DEPLOYMENTDATA
-grep "RESULT: " $TEST1OUTPUT | sed "s/RESULT: //" > $TEST1RESULTS
-cat $TEST1RESULTS
+grep "RESULT: " $TEST2OUTPUT | sed "s/RESULT: //" > $TEST2RESULTS
+cat $TEST2RESULTS
