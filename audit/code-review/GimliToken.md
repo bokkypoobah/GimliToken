@@ -23,34 +23,6 @@ contract GimliToken is ERC20, SafeMath, Ownable {
     /*************************
     **** Global variables ****
     *************************/
-    // BK Ok
-    address public constant MULTISIG_WALLET_ADDRESS = 0xcac029186c773dbfc18402f464a3818e46541fba; // TODO
-
-    // crowdsale
-    // BK Ok
-    uint256 public constant CROWDSALE_AMOUNT = 80 * MILLION_GML; // Should not include vested amount
-    // BK NOTE - Consider using the Unix timestamp here
-    uint256 public constant CROWDSALE_START_BLOCK = 4278234; // Around 11AM GMT on 9/16/17
-    // BK NOTE - Consider using the Unix timestamp here
-    uint256 public constant CROWDSALE_END_BLOCK = 4328345; // Around 11PM GMT on 9/30/17
-    // BK Ok
-    uint256 public constant CROWDSALE_PRICE = 700; // 700 GML / ETH
-    // BK Ok
-    uint256 public constant VESTING_1_AMOUNT = 15 * MILLION_GML; // TODO
-    // BK NOTE - Consider using the Unix timestamp here
-    uint256 public constant VESTING_1_BLOCK = 5539673; // Around start + 1 year
-    // BK Ok
-    uint256 public constant VESTING_2_AMOUNT = 15 * MILLION_GML; // TODO
-    // BK NOTE - Consider using the Unix timestamp here
-    uint256 public constant VESTING_2_BLOCK = 6801113; // Around start + 2 years
-    // BK Ok
-    bool public vesting1Withdrawn = false;
-    // BK Ok
-    bool public vesting2Withdrawn = false;
-    // BK NOTE - This should really be crowdsaleCompleted
-    bool public crowdsaleCanceled = false;
-    // BK Ok
-    uint256 public soldAmount;
 
     // BK Ok
     uint8 public constant decimals = 8;
@@ -58,12 +30,12 @@ contract GimliToken is ERC20, SafeMath, Ownable {
     string public constant name = "Gimli Token";
     // BK Ok
     string public constant symbol = "GIM";
-    // BK NOTE - Incorrect spelling
-    string public constant versoin = 'v1';
+    // BK Ok
+    string public constant version = 'v1';
 
     /// total amount of tokens
     // BK Ok
-    uint256 public constant UNIT = 10**decimals;
+    uint256 public constant UNIT = 10**uint256(decimals);
     // BK Ok
     uint256 constant MILLION_GML = 10**6 * UNIT; // can't use `safeMul` with constant
     /// Should include CROWDSALE_AMOUNT and VESTING_X_AMOUNT
@@ -78,6 +50,9 @@ contract GimliToken is ERC20, SafeMath, Ownable {
     // BK Ok
     mapping (address => mapping (address => uint256)) allowed;
 
+    // BK Ok
+    bool transferable = false;
+
     /*********************
     **** Transactions ****
     *********************/
@@ -90,7 +65,7 @@ contract GimliToken is ERC20, SafeMath, Ownable {
     // BK Ok
     function transfer(address _to, uint256 _value) returns (bool success) {
         // BK Ok
-        require(block.number > CROWDSALE_END_BLOCK);
+        require(transferable);
 
         // BK NOTE - _value can be == 0 but cannot be < 0 as it is an unsigned integer
         // BK Ok
@@ -117,7 +92,7 @@ contract GimliToken is ERC20, SafeMath, Ownable {
     // BK Ok
     function transferFrom(address _from, address _to, uint256 _value) returns (bool success) {
         // BK Ok
-        require(block.number > CROWDSALE_END_BLOCK);
+        require(transferable);
 
         // BK NOTE - _value can be == 0 but cannot be < 0 as it is an unsigned integer
         // BK Ok
