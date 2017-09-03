@@ -7,7 +7,7 @@ Source file [../../sol/SafeMath.sol](../../sol/SafeMath.sol).
 <hr />
 
 ```javascript
-// BK Ok
+// BK NOTE - Consider using ^0.4.16
 pragma solidity ^0.4.11;
 
 // @title Math operations with safety checks

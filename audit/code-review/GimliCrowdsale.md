@@ -7,8 +7,10 @@ Source file [../../sol/GimliCrowdsale.sol](../../sol/GimliCrowdsale.sol).
 <hr />
 
 ```javascript
+// BK NOTE - Consider using ^0.4.16
 pragma solidity ^0.4.11;
 
+// BK Next 2 Ok
 import 'SafeMath.sol';
 import "GimliToken.sol";
 

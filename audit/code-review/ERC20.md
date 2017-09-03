@@ -7,7 +7,7 @@ Source file [../../sol/ERC20.sol](../../sol/ERC20.sol).
 <hr />
 
 ```javascript
-// BK Ok
+// BK NOTE - Consider using ^0.4.16
 pragma solidity ^0.4.11;
 
 // BK Ok

@@ -7,7 +7,7 @@ Source file [../../sol/Ownable.sol](../../sol/Ownable.sol).
 <hr />
 
 ```javascript
-// BK Ok
+// BK NOTE - Consider using ^0.4.16
 pragma solidity ^0.4.11;
 
 /// @title Base contract with an owner.

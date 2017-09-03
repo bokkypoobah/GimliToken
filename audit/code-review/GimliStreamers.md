@@ -7,6 +7,7 @@ Source file [../../sol/GimliStreamers.sol](../../sol/GimliStreamers.sol).
 <hr />
 
 ```javascript
+// BK NOTE - Consider using ^0.4.16
 pragma solidity ^0.4.11;
 
 import "SafeMath.sol";
@@ -25,12 +26,14 @@ contract GimliStreamers is SafeMath, GimliToken, Administrable {
         mapping    (address => contractPermissions) permissions; // Contract permissions indexed by contract address
     }
 
+    // BK NOTE - Rename to be ContractPermission
     struct contractPermissions {
         uint256    streamerFeesPpm; // ppm, ex: 5 for 0.5%
         uint256    gimliFeesPpm; // ppm, ex: 5 for 0.5%
         uint256    maxAmount;
     }
 
+    // BK Next 2 Ok
     event StreamerAuthorized(address indexed streamerAddress, address indexed contractAddress, uint256 maxAmount);
     event StreamerRevoked(address indexed streamerAddress);
 

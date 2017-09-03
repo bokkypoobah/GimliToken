@@ -40,13 +40,16 @@ Target crowdsale commencement date Sep 16 2017
 
       uint256 quantity = safeDiv(safeMul(msg.value, CROWDSALE_PRICE), 10**(18-uint256(decimals)));
 
-* **MEDIUM IMPORTANCE** In *GimliToken*, `10**decimals` should be specified as `10**uint256(decimals)` to avoid the
+* **HIGH IMPORTANCE** In *GimliToken*, `10**decimals` should be specified as `10**uint256(decimals)` to avoid the
   following error message:
 
       GimliToken.sol:36:36: Warning: Result of exponentiation has type uint8 and thus might overflow. Silence this warning by converting the literal to the expected type.
           uint256 public constant UNIT = 10**decimals;
                                          ^----------^
 
+* **HIGH IMPORTANCE** Any changes to the `balances[...]` data should have an associated `Transfer(...)` event logged so
+  the token explorers are able to take note of the changes in the balances. Areas that will need the `Transfer(...)`
+  event code added to in *GimliCrowdsale* are `preAllocate(...)` and `releaseVesting(...)`
 * **MEDIUM IMPORTANCE** Consider adding a check to `GimliCrowdsale.closeCrowdsale()` to allow this function to be
   executed before the crowdsale ends if the crowdsale is sold out
 * **MEDIUM IMPORTANCE** The current `GimliCrowdsale.transferAnyERC20Token(...)` should be renamed to `finalise()` or
@@ -61,7 +64,9 @@ Target crowdsale commencement date Sep 16 2017
 * **MEDIUM IMPORTANCE** The current vesting unlock functionality pulls tokens out of thin air when the vesting period is
   passed. The vested tokens should be allocated to an account when the crowdsale is `finalise()`-ed, and unlocked into
   the appropriate accounts when the vesting period has passed. Otherwise the token explorers will not tally up the
-  tokens correctly
+  tokens correctly. See [LockedTokens.sol](https://github.com/openanx/OpenANXToken/blob/master/contracts/LockedTokens.sol)
+  and [DevTokensHolder.sol](https://github.com/bokkypoobah/StatusNetworkTokenAudit/blob/master/contracts/DevTokensHolder.sol)
+  for examples of locking tokens in a contract
 * **LOW IMPORTANCE** Use the `acceptOwnership(...)` pattern in the *Ownable* contract to transfer ownership safely.
   See [example](https://github.com/openanx/OpenANXToken/blob/master/contracts/Owned.sol#L51-L55)
 * **LOW IMPORTANCE** There is a mix of `uint` and `uint256` across the different contracts. Use one or the other consistently
@@ -72,8 +77,8 @@ Target crowdsale commencement date Sep 16 2017
 * **LOW IMPORTANCE** The crowdsale start and end dates are defined by start and stop blocknumbers. Consider using
   `block.timestamp` and compare these against the start and stop Unix timestamps. This provides potential participants
   more certainty of the start and end of the crowdsale
-* **LOW IMPORTANCE** Increase the minimum Solidity version number from ^0.4.11. Review the bugfixes in the Solidity
-  [releases](https://github.com/ethereum/solidity/releases) list
+* **LOW IMPORTANCE** Increase the minimum Solidity version number from `^0.4.11` to `^0.4.16`. Review the bugfixes in
+  the Solidity [releases](https://github.com/ethereum/solidity/releases) list to confirm your target version
 * **LOW IMPORTANCE** Incorrect comment in *Gimli*
 
       // `msg.sender` becomes the owner
