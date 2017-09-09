@@ -7,8 +7,9 @@ Status: Work in progress
 `TODO`
 
 Commits [18b26f3](https://github.com/thegimliproject/GimliToken/commit/18b26f346bc9a4e393e65f919736c55a210a1371),
-[a4f962f](https://github.com/thegimliproject/GimliToken/commit/a4f962f98672067ef0ff40c87d2d0ecbcd30ae82) and
-[baa8715](https://github.com/thegimliproject/GimliToken/commit/baa87152bf587c95c6d4dd2d96acca9db2bdc24c).
+[a4f962f](https://github.com/thegimliproject/GimliToken/commit/a4f962f98672067ef0ff40c87d2d0ecbcd30ae82),
+[baa8715](https://github.com/thegimliproject/GimliToken/commit/baa87152bf587c95c6d4dd2d96acca9db2bdc24c) and
+[5d0eeb2](https://github.com/thegimliproject/GimliToken/commit/5d0eeb2f83d4d12b2dcd9f2bb531da25f057650c).
 
 Target crowdsale commencement date Sep 16 2017
 
@@ -34,13 +35,8 @@ Target crowdsale commencement date Sep 16 2017
 
 ### Outstanding Recommendations
 
-* **LOW IMPORTANCE** There is a mix of `uint` and `uint256` across the different contracts. Use one or the other consistently
 * **LOW IMPORTANCE** Increase the minimum Solidity version number from `^0.4.11` to `^0.4.16`. Review the bugfixes in
   the Solidity [releases](https://github.com/ethereum/solidity/releases) list to confirm your target version
-* **LOW IMPORTANCE** Call `safeSub(...)` to reduce token balance from the source account before calling 
-  `safeAdd(...)` to increase token balance for the destination account in *GimliToken* `preAllocate(...)` and
-  `releaseVesting(...)`
-* **LOW IMPORTANCE** Set `GimliToken.transferable` to be public
 
 <br />
 
@@ -151,6 +147,14 @@ Target crowdsale commencement date Sep 16 2017
                                                                            ^----------^
 
   * [x] Fixed in [baa8715](https://github.com/thegimliproject/GimliToken/commit/baa87152bf587c95c6d4dd2d96acca9db2bdc24c)
+* **LOW IMPORTANCE** There is a mix of `uint` and `uint256` across the different contracts. Use one or the other consistently
+  * [x] Fixed in [5d0eeb2](https://github.com/thegimliproject/GimliToken/commit/5d0eeb2f83d4d12b2dcd9f2bb531da25f057650c)
+* **LOW IMPORTANCE** Call `safeSub(...)` to reduce token balance from the source account before calling 
+  `safeAdd(...)` to increase token balance for the destination account in *GimliToken* `preAllocate(...)` and
+  `releaseVesting(...)`
+  * [x] Fixed in [5d0eeb2](https://github.com/thegimliproject/GimliToken/commit/5d0eeb2f83d4d12b2dcd9f2bb531da25f057650c)
+* **LOW IMPORTANCE** Set `GimliToken.transferable` to be public
+  * [x] Fixed in [5d0eeb2](https://github.com/thegimliproject/GimliToken/commit/5d0eeb2f83d4d12b2dcd9f2bb531da25f057650c)
 
 <br />
 
