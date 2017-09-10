@@ -37,6 +37,8 @@ Target crowdsale commencement date Sep 16 2017
 
 * **LOW IMPORTANCE** Increase the minimum Solidity version number from `^0.4.11` to `^0.4.16`. Review the bugfixes in
   the Solidity [releases](https://github.com/ethereum/solidity/releases) list to confirm your target version
+* **LOW IMPORTANCE** Can improve `GimliCrowdsale.transferOtherERC20Token(...)` by changing `require(tokenAddress != address(this));` to
+  `require(tokenAddress != address(this) || transferable);`
 
 <br />
 
@@ -176,23 +178,21 @@ Target crowdsale commencement date Sep 16 2017
 ## Code Review
 
 * [x] [code-review/SafeMath.md](code-review/SafeMath.md)
-  * [x] contract SafeMath 
+  * [x] contract SafeMath
 * [x] [code-review/Ownable.md](code-review/Ownable.md)
-  * [x] contract Ownable 
+  * [x] contract Ownable
 * [x] [code-review/Administrable.md](code-review/Administrable.md)
-  * [x] contract Administrable is Ownable 
+  * [x] contract Administrable is Ownable
 * [x] [code-review/ERC20Basic.md](code-review/ERC20Basic.md)
-  * [x] contract ERC20Basic 
+  * [x] contract ERC20Basic
 * [x] [code-review/ERC20.md](code-review/ERC20.md)
-  * [x] contract ERC20 is ERC20Basic 
+  * [x] contract ERC20 is ERC20Basic
 * [x] [code-review/GimliToken.md](code-review/GimliToken.md)
-  * [x] contract GimliToken is ERC20, SafeMath, Ownable 
-* [ ] [code-review/GimliCrowdsale.md](code-review/GimliCrowdsale.md)
-  * [ ] contract GimliCrowdsale is SafeMath, GimliToken 
-* [ ] [code-review/GimliStreamers.md](code-review/GimliStreamers.md)
-  * [ ] contract GimliStreamers is SafeMath, GimliToken, Administrable 
+  * [x] contract GimliToken is ERC20, SafeMath, Ownable
+* [x] [code-review/GimliCrowdsale.md](code-review/GimliCrowdsale.md)
+  * [x] contract GimliCrowdsale is SafeMath, GimliToken
 * [x] [code-review/Gimli.md](code-review/Gimli.md)
-  * [x] contract Gimli is GimliStreamers, GimliCrowdsale 
+  * [x] contract Gimli is GimliCrowdsale, Administrable
 
 <br />
 

@@ -10,18 +10,21 @@ Source file [../../sol/GimliCrowdsale.sol](../../sol/GimliCrowdsale.sol).
 // BK NOTE - Consider using ^0.4.16
 pragma solidity ^0.4.11;
 
-// BK Next 2 Ok
+// BK Next 3 Ok
 import 'SafeMath.sol';
 import "GimliToken.sol";
 import "ERC20.sol";
 
 /// @title Gimli Crowdsale Contract.
+// BK Ok
 contract GimliCrowdsale is SafeMath, GimliToken {
 
+    // BK Next 2 Ok
     address public constant MULTISIG_WALLET_ADDRESS = 0xd889caA9847F64C77118AD5Ec60291525A3d3939;
     address public constant LOCKED_ADDRESS = 0xabcdefabcdefabcdefabcdefabcdefabcdefabcd;
 
     // crowdsale
+    // BK Next 8 Ok
     uint256 public constant CROWDSALE_AMOUNT = 80 * MILLION_GML; // Should not include vested amount
     uint256 public constant START_DATE = 1400000000; // TODO (epoch timestamp)
     uint256 public constant END_DATE = 1500000000; // TODO (epoch timestamp)
@@ -30,9 +33,12 @@ contract GimliCrowdsale is SafeMath, GimliToken {
     uint256 public constant VESTING_1_DATE = 1600000000; // TODO (epoch timestamp)
     uint256 public constant VESTING_2_AMOUNT = 15 * MILLION_GML; // TODO
     uint256 public constant VESTING_2_DATE = 1700000000; // TODO (epoch timestamp)
+    // BK Next 2 Ok
     bool public vesting1Withdrawn = false;
     bool public vesting2Withdrawn = false;
+    // BK Ok
     bool public crowdsaleCanceled = false;
+    // BK Next 2 Ok
     uint256 public soldAmount; // GIM
     uint256 public paidAmount; // ETH
 
@@ -49,34 +55,42 @@ contract GimliCrowdsale is SafeMath, GimliToken {
         require(block.timestamp >= START_DATE && block.timestamp <= END_DATE);
 
         // calculate and check quantity
+        // BK Ok
         uint256 quantity = safeDiv(safeMul(msg.value, CROWDSALE_PRICE), 10**(18-uint256(decimals)));
+        // BK NOTE - Could be written as require(balances[this] >= quantity)
+        // BK Ok
         if (safeSub(balances[this], quantity) < 0)
+            // BK Ok
             return;
 
         // BK Ok
         require(MULTISIG_WALLET_ADDRESS.send(msg.value));
 
         // update balances
+        // BK Next 2 Ok
         balances[this] = safeSub(balances[this], quantity);
         balances[msg.sender] = safeAdd(balances[msg.sender], quantity);
+        // BK Next 2 Ok
         soldAmount = safeAdd(soldAmount, quantity);
         paidAmount = safeAdd(paidAmount, msg.value);
 
         // BK Ok - Log event
         Transfer(this, msg.sender, quantity);
-        // BK NOTE - Transfer `msg.value` directly to the wallet, e.g. `crowdsaleWallet.transfer(msg.value);`
     }
 
     /// @notice returns non-sold tokens to owner
-    // BK Ok
+    // BK Ok - Only owner can execute
     function  closeCrowdsale() onlyOwner {
         // check if closable
+        // BK Ok - Past end date, cancelled or crowdsale sold out
         require(block.timestamp > END_DATE || crowdsaleCanceled || balances[this] == 0);
 
         // enable token transfer
+        // BK Ok
         transferable = true;
 
         // update balances
+        // BK Ok
         if (balances[this] > 0) {
             // BK Ok
             uint256 amount = balances[this];
@@ -85,13 +99,15 @@ contract GimliCrowdsale is SafeMath, GimliToken {
             // BK Ok
             balances[this] = 0;
 
-            // BK Ok
+            // BK Ok - Log event
             Transfer(this, owner, amount);
         }
     }
 
     /// @notice Terminate the crowdsale before END_DATE
+    // BK Ok - Only owner can execute
     function cancelCrowdsale() onlyOwner {
+        // BK Ok
         crowdsaleCanceled = true;
     }
 
@@ -99,46 +115,64 @@ contract GimliCrowdsale is SafeMath, GimliToken {
     /// @param _to The pre-allocation destination
     /// @param _value The amount of token to be allocated
     /// @param _price ETH paid for these tokens
+    // BK Ok
     function preAllocate(address _to, uint256 _value, uint256 _price) onlyOwner {
+        // BK Ok
         require(block.timestamp < START_DATE);
 
+        // BK Next 4 Ok
         balances[this] = safeSub(balances[this], _value);
         balances[_to] = safeAdd(balances[_to], _value);
         soldAmount = safeAdd(soldAmount, _value);
         paidAmount = safeAdd(paidAmount, _price);
 
+        // BK Ok - Log event
         Transfer(this, _to, _value);
     }
 
     /// @notice Send vested amount to _destination
     /// @param _destination The address of the recipient
     /// @return Whether the release was successful or not
+    // BK Ok - Only owner can execute
     function releaseVesting(address _destination) onlyOwner returns (bool success) {
+        // BK Ok
         if (block.timestamp > VESTING_1_DATE && vesting1Withdrawn == false) {
+            // BK Next 2 Ok
             balances[LOCKED_ADDRESS] = safeSub(balances[LOCKED_ADDRESS], VESTING_1_AMOUNT);
             balances[_destination] = safeAdd(balances[_destination], VESTING_1_AMOUNT);
+            // BK Ok
             vesting1Withdrawn = true;
+            // BK Ok - Log event
             Transfer(LOCKED_ADDRESS, _destination, VESTING_1_AMOUNT);
+            // BK Ok
             return true;
         }
         if (block.timestamp > VESTING_2_DATE && vesting2Withdrawn == false) {
+            // BK Next 2 Ok
             balances[LOCKED_ADDRESS] = safeSub(balances[LOCKED_ADDRESS], VESTING_2_AMOUNT);
             balances[_destination] = safeAdd(balances[_destination], VESTING_2_AMOUNT);
+            // BK Ok
             vesting2Withdrawn = true;
+            // BK Ok - Log event
             Transfer(LOCKED_ADDRESS, _destination, VESTING_2_AMOUNT);
+            // BK Ok
             return true;
         }
+        // BK Ok
         return false;
     }
 
     /// @notice transfer out any accidentally sent ERC20 tokens
     /// @param tokenAddress Address of the ERC20 contract
     /// @param amount The amount of token to be transfered
+    // BK Ok - Only owner can execute
     function transferOtherERC20Token(address tokenAddress, uint256 amount)
       onlyOwner returns (bool success)
     {
         // can't be used for GIM token
+        // BK Ok - This means GIM tokens can be accidentally locked in this token contract
         require(tokenAddress != address(this));
+        // BK Ok
         return ERC20(tokenAddress).transfer(owner, amount);
     }
 }
