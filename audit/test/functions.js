@@ -239,20 +239,6 @@ function printTokenContractDetails() {
     });
     adminstratorRemovedEvent.stopWatching();
 
-    var streamerAuthorizedEvent = contract.StreamerAuthorized({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
-    i = 0;
-    streamerAuthorizedEvent.watch(function (error, result) {
-      console.log("RESULT: StreamerAuthorized " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
-    });
-    streamerAuthorizedEvent.stopWatching();
-
-    var streamerRevokedEvent = contract.StreamerRevoked({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
-    i = 0;
-    streamerRevokedEvent.watch(function (error, result) {
-      console.log("RESULT: StreamerRevoked " + i++ + " #" + result.blockNumber + " " + JSON.stringify(result.args));
-    });
-    streamerRevokedEvent.stopWatching();
-
     var approvalEvents = contract.Approval({}, { fromBlock: tokenFromBlock, toBlock: latestBlock });
     i = 0;
     approvalEvents.watch(function (error, result) {

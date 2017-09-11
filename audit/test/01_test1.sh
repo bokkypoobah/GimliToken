@@ -137,8 +137,8 @@ console.log("RESULT: ");
 var preAllocMessage = "Add Preallocations";
 // -----------------------------------------------------------------------------
 console.log("RESULT: " + preAllocMessage);
-var preAlloc1Tx = token.preAllocate(account3, "100000000000", {from: wallet, gas: 400000});
-var preAlloc2Tx = token.preAllocate(account4, "1000000000000", {from: wallet, gas: 400000});
+var preAlloc1Tx = token.preAllocate(account3, "100000000000", web3.toWei("10", "ether"), {from: wallet, gas: 400000});
+var preAlloc2Tx = token.preAllocate(account4, "1000000000000", web3.toWei("100", "ether"), {from: wallet, gas: 400000});
 while (txpool.status.pending > 0) {
 }
 printTxData("preAlloc1Tx", preAlloc1Tx);
@@ -171,6 +171,20 @@ while (txpool.status.pending > 0) {
 printTxData("sendContribution1Tx", sendContribution1Tx);
 printBalances();
 failIfGasEqualsGasUsed(sendContribution1Tx, sendContribution1Message + " - ac5 10 ETH = 7,000 GIM");
+printTokenContractDetails();
+console.log("RESULT: ");
+
+
+// -----------------------------------------------------------------------------
+var sendContribution2Message = "Send Contribution 2";
+// -----------------------------------------------------------------------------
+console.log("RESULT: " + sendContribution2Message);
+var sendContribution2Tx = eth.sendTransaction({from: account7, to: tokenAddress, gas: 400000, value: web3.toWei("250000", "ether")});
+while (txpool.status.pending > 0) {
+}
+printTxData("sendContribution2Tx", sendContribution2Tx);
+printBalances();
+passIfGasEqualsGasUsed(sendContribution2Tx, sendContribution2Message + " - ac7 250,000 ETH = 175,000,000 GIM - Expecting failure");
 printTokenContractDetails();
 console.log("RESULT: ");
 

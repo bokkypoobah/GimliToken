@@ -12,17 +12,18 @@ contract GimliCrowdsale is SafeMath, GimliToken {
 
     // crowdsale
     uint256 public constant CROWDSALE_AMOUNT = 80 * MILLION_GML; // Should not include vested amount
-    uint public constant START_DATE = 1504501367; // Mon  4 Sep 2017 05:02:47 UTC
-    uint public constant END_DATE = 1504501457; // Mon  4 Sep 2017 05:04:17 UTC
+    uint256 public constant START_DATE = 1505031781; // Sun 10 Sep 2017 08:23:01 UTC
+    uint256 public constant END_DATE = 1505031871; // Sun 10 Sep 2017 08:24:31 UTC
     uint256 public constant CROWDSALE_PRICE = 700; // 700 GML / ETH
     uint256 public constant VESTING_1_AMOUNT = 15 * MILLION_GML; // TODO
-    uint256 public constant VESTING_1_DATE = 1504501517; // Mon  4 Sep 2017 05:05:17 UTC
+    uint256 public constant VESTING_1_DATE = 1505031931; // Sun 10 Sep 2017 08:25:31 UTC
     uint256 public constant VESTING_2_AMOUNT = 15 * MILLION_GML; // TODO
-    uint256 public constant VESTING_2_DATE = 1504501577; // Mon  4 Sep 2017 05:06:17 UTC
+    uint256 public constant VESTING_2_DATE = 1505031991; // Sun 10 Sep 2017 08:26:31 UTC
     bool public vesting1Withdrawn = false;
     bool public vesting2Withdrawn = false;
     bool public crowdsaleCanceled = false;
-    uint256 public soldAmount;
+    uint256 public soldAmount; // GIM
+    uint256 public paidAmount; // ETH
 
     /// @notice `msg.sender` invest `msg.value`
     function() payable {
@@ -43,6 +44,7 @@ contract GimliCrowdsale is SafeMath, GimliToken {
         balances[this] = safeSub(balances[this], quantity);
         balances[msg.sender] = safeAdd(balances[msg.sender], quantity);
         soldAmount = safeAdd(soldAmount, quantity);
+        paidAmount = safeAdd(paidAmount, msg.value);
 
         Transfer(this, msg.sender, quantity);
     }
@@ -72,12 +74,14 @@ contract GimliCrowdsale is SafeMath, GimliToken {
     /// @notice Pre-allocate tokens to advisor or partner
     /// @param _to The pre-allocation destination
     /// @param _value The amount of token to be allocated
-    function preAllocate(address _to, uint256 _value) onlyOwner {
+    /// @param _price ETH paid for these tokens
+    function preAllocate(address _to, uint256 _value, uint256 _price) onlyOwner {
         require(block.timestamp < START_DATE);
 
-        balances[_to] = safeAdd(balances[_to], _value);
         balances[this] = safeSub(balances[this], _value);
+        balances[_to] = safeAdd(balances[_to], _value);
         soldAmount = safeAdd(soldAmount, _value);
+        paidAmount = safeAdd(paidAmount, _price);
 
         Transfer(this, _to, _value);
     }
@@ -87,15 +91,15 @@ contract GimliCrowdsale is SafeMath, GimliToken {
     /// @return Whether the release was successful or not
     function releaseVesting(address _destination) onlyOwner returns (bool success) {
         if (block.timestamp > VESTING_1_DATE && vesting1Withdrawn == false) {
-            balances[_destination] = safeAdd(balances[_destination], VESTING_1_AMOUNT);
             balances[LOCKED_ADDRESS] = safeSub(balances[LOCKED_ADDRESS], VESTING_1_AMOUNT);
+            balances[_destination] = safeAdd(balances[_destination], VESTING_1_AMOUNT);
             vesting1Withdrawn = true;
             Transfer(LOCKED_ADDRESS, _destination, VESTING_1_AMOUNT);
             return true;
         }
         if (block.timestamp > VESTING_2_DATE && vesting2Withdrawn == false) {
-            balances[_destination] = safeAdd(balances[_destination], VESTING_2_AMOUNT);
             balances[LOCKED_ADDRESS] = safeSub(balances[LOCKED_ADDRESS], VESTING_2_AMOUNT);
+            balances[_destination] = safeAdd(balances[_destination], VESTING_2_AMOUNT);
             vesting2Withdrawn = true;
             Transfer(LOCKED_ADDRESS, _destination, VESTING_2_AMOUNT);
             return true;
@@ -106,7 +110,7 @@ contract GimliCrowdsale is SafeMath, GimliToken {
     /// @notice transfer out any accidentally sent ERC20 tokens
     /// @param tokenAddress Address of the ERC20 contract
     /// @param amount The amount of token to be transfered
-    function transferOtherERC20Token(address tokenAddress, uint amount)
+    function transferOtherERC20Token(address tokenAddress, uint256 amount)
       onlyOwner returns (bool success)
     {
         // can't be used for GIM token

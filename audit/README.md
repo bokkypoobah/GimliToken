@@ -1,17 +1,64 @@
 # Gimli Token Contract Audit
 
-Status: Work in progress
+Status: Two outstanding recommendations for Gimli to respond to
 
 ## Summary
 
-`TODO`
+[Gimli](https://gimli.io/) intends to run a [token launch](https://gimli.io/token-launch/) commencing on September 16 2017.
 
-Commits [18b26f3](https://github.com/thegimliproject/GimliToken/commit/18b26f346bc9a4e393e65f919736c55a210a1371),
+Bok Consulting Pty Ltd was commissioned to perform an audit on the Ethereum smart contracts for Gimli's crowdsale.
+
+This audit has been conducted on Gimli's source code in commits
+[18b26f3](https://github.com/thegimliproject/GimliToken/commit/18b26f346bc9a4e393e65f919736c55a210a1371),
 [a4f962f](https://github.com/thegimliproject/GimliToken/commit/a4f962f98672067ef0ff40c87d2d0ecbcd30ae82),
 [baa8715](https://github.com/thegimliproject/GimliToken/commit/baa87152bf587c95c6d4dd2d96acca9db2bdc24c) and
 [5d0eeb2](https://github.com/thegimliproject/GimliToken/commit/5d0eeb2f83d4d12b2dcd9f2bb531da25f057650c).
 
-Target crowdsale commencement date Sep 16 2017
+No potential vulnerabilities have been identified in the crowdsale and token contract.
+
+There are 2 oustanding recommendations, but these are of low importance.
+
+<br />
+
+### Crowdsale Mainnet Addresses
+
+`TBA`
+
+<br />
+
+### Crowdsale Contract
+
+The *Gimli* combined crowdsale/token contract will accept ethers (ETH) from Ethereum account transactions sent to the deployment address
+of this contract.
+
+ETH contributed by participants to the *Gimli* crowdsale contract will result in GIM tokens being allocated to the
+participant's account in the token contract. The contributed ETHs are immediately transferred to the multisig wallet at
+the `MULTISIG_WALLET_ADDRESS` address, reducing the risk of the loss of ETHs in this bespoke smart contract.
+
+The crowdsale contract will generate `Transfer({crowdsale address}, participantAddress, tokens)` events during the crowdsale period and this
+event is used by token explorers to recognise the token contract and to display the ongoing token transfers during the crowdsale period.
+
+<br />
+
+### Token Contract
+
+The *GIM* token contract is combined with the crowdsale mechanism in the *Gimli* contract.
+
+The token contract is [ERC20](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-20-token-standard.md) compliant with the following features:
+
+* `decimals` is correctly defined as `uint8` instead of `uint256`
+* `transfer(...)` and `transferFrom(...)` will return *false* if there is insufficient balance to transfer or the transfer amount is 0 and
+  *true* otherwise
+* `transfer(...)` and `transferFrom(...)` have not been built with a check on the size of the data being passed (and this 
+  check is not an effective check anyway)
+* `approve(...)` requires that a non-zero approval limit be set to 0 before a new non-zero limit can be set
+
+The *GIM* token contract has a `setStreamerContract(...)` function that will allow a contract account to transfer any account's *GIM* tokens
+up to a specified maximum amount. This `setStreamerContract(...)` function can be called by Gimli administrators.
+
+The `transferGIM(...)` function will allow the contract account specified by `setStreamerContract(...)` to deduct tokens for payments and
+fees up to the specified maximum amount, but the transaction will have to be executed by the owner of the account the tokens are being
+deducted from.
 
 <br />
 
@@ -20,9 +67,17 @@ Target crowdsale commencement date Sep 16 2017
 ## Table Of Contents
 
 * [Summary](#summary)
+  * [Crowdsale Mainnet Addresses](#crowdsale-mainnet-addresses)
+  * [Crowdsale Contract](#crowdsale-contract)
+  * [Token Contract](#token-contract)
 * [Recommendations](#recommendations)
   * [Outstanding Recommendations](#outstanding-recommendations)
   * [Completed Recommendations](#completed-recommendations)
+* [Potential Vulnerabilities](#potential-vulnerabilities)
+* [Scope](#scope)
+* [Limitations](#limitations)
+* [Due Diligence](#due-diligence)
+* [Risks](#risks)
 * [Testing](#testing)
 * [Code Review](#code-review)
 * [References](#references)
@@ -162,14 +217,89 @@ Target crowdsale commencement date Sep 16 2017
 
 <hr />
 
+## Potential Vulnerabilities
+
+No potential vulnerabilities have been identified in the crowdsale and token contract.
+
+<br />
+
+<hr />
+
+## Scope
+
+This audit is into the technical aspects of the crowdsale contracts. The primary aim of this audit is to ensure that funds
+contributed to these contracts are not easily attacked or stolen by third parties. The secondary aim of this audit is that
+ensure the coded algorithms work as expected. This audit does not guarantee that that the code is bugfree, but intends to
+highlight any areas of weaknesses.
+
+<br />
+
+<hr />
+
+## Limitations
+
+This audit makes no statements or warranties about the viability of the Gimli's business proposition, the individuals
+involved in this business or the regulatory regime for the business model.
+
+<br />
+
+<hr />
+
+## Due Diligence
+
+As always, potential participants in any crowdsale are encouraged to perform their due diligence on the business proposition
+before funding any crowdsales.
+
+Potential participants are also encouraged to only send their funds to the official crowdsale Ethereum address, published on
+the crowdsale beneficiary's official communication channel.
+
+Scammers have been publishing phishing address in the forums, twitter and other communication channels, and some go as far as
+duplicating crowdsale websites. Potential participants should NOT just click on any links received through these messages.
+Scammers have also hacked the crowdsale website to replace the crowdsale contract address with their scam address.
+ 
+Potential participants should also confirm that the verified source code on EtherScan.io for the published crowdsale address
+matches the audited source code, and that the deployment parameters are correctly set, including the constant parameters.
+
+<br />
+
+<hr />
+
+## Risks
+
+* The risk of crowdsale funds getting stolen or hacked from the *Gimli* contract is low as the contributed funds are immediately
+  transferred to an external multisig wallet.
+
+<br />
+
+<hr />
+
 ## Testing
 
-* Maximum funding not reached, wait until the end of the crowdsale to finalise
-  * Testing script [test/01_test1.sh](test/01_test1.sh)
-  * Testing results [test/test1results.txt](test/test1results.txt)
-* Maximum funding reached early, finalise crowdsale early
-  * Testing script [test/02_test2.sh](test/02_test2.sh)
-  * Testing results [test/test2results.txt](test/test2results.txt)
+### Test 1
+
+The following functions were tested using the script [test/01_test1.sh](test/01_test1.sh) with the summary results saved
+in [test/test1results.txt](test/test1results.txt) and the detailed output saved in [test/test1output.txt](test/test1output.txt):
+
+* [x] Deploy *Gimli* crowdsale/token contract
+* [x] Add preallocated tokens
+* [x] Contribute to the crowdsale/token contract
+* [x] Finalise the crowdsale after the end date, including generating the token allocations for the various stakeholders
+* [x] `transfer(...)` and `transferFrom(...)` the *GIM* tokens
+* [x] Release the 1 and 2 years vested *GIM* tokens
+
+<br />
+
+### Test 2
+
+The following functions were tested using the script [test/02_test2.sh](test/02_test2.sh) with the summary results saved
+in [test/test2results.txt](test/test2results.txt) and the detailed output saved in [test/test2output.txt](test/test2output.txt):
+
+* [x] As in [Test 1](#test-1) above, but with the maximum funding being reached before the crowdsale end date, and the crowdsale
+  being finalised early
+
+<br />
+
+Details of the testing environment can be found in [test](test).
 
 <br />
 
@@ -206,4 +336,4 @@ Target crowdsale commencement date Sep 16 2017
 
 <br />
 
-Enjoy. (c) BokkyPooBah / Bok Consulting Pty Ltd Sep 3 2017. The MIT Licence.
+Enjoy. (c) BokkyPooBah / Bok Consulting Pty Ltd Sep 12 2017. The MIT Licence.
