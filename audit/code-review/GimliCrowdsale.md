@@ -21,7 +21,7 @@ contract GimliCrowdsale is SafeMath, GimliToken {
 
     // BK Next 2 Ok
     address public constant MULTISIG_WALLET_ADDRESS = 0xc79ab28c5c03f1e7fbef056167364e6782f9ff4f;
-    address public constant LOCKED_ADDRESS = 0xc79ab28c5c03f1e7fbef056167364e6782f9ff4f;
+    address public constant LOCKED_ADDRESS = 0xabcdefabcdefabcdefabcdefabcdefabcdefabcd;
 
     // crowdsale
     // BK Next 8 Ok
@@ -92,13 +92,13 @@ contract GimliCrowdsale is SafeMath, GimliToken {
         if (balances[this] > 0) {
             // BK Ok
             uint256 amount = balances[this];
-            // BK Ok - Transfer unsold tokens to the owner
-            balances[owner] = safeAdd(balances[owner], amount);
+            // BK Ok - Transfer unsold tokens to the multisig
+            balances[MULTISIG_WALLET_ADDRESS] = safeAdd(balances[MULTISIG_WALLET_ADDRESS], amount);
             // BK Ok
             balances[this] = 0;
 
             // BK Ok - Log event
-            Transfer(this, owner, amount);
+            Transfer(this, MULTISIG_WALLET_ADDRESS, amount);
         }
     }
 

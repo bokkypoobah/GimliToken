@@ -14,8 +14,9 @@ This audit has been conducted on Gimli's source code in commits
 [baa8715](https://github.com/thegimliproject/GimliToken/commit/baa87152bf587c95c6d4dd2d96acca9db2bdc24c),
 [5d0eeb2](https://github.com/thegimliproject/GimliToken/commit/5d0eeb2f83d4d12b2dcd9f2bb531da25f057650c),
 [998029f](https://github.com/thegimliproject/GimliToken/commit/998029fa3c7debbbdc903873f407e3d11b9caaab),
-[4dd9283](https://github.com/thegimliproject/GimliToken/commit/4dd9283f18536115cf618d185b384a13cb3403c5) and
-[8d450ed](https://github.com/thegimliproject/GimliToken/commit/8d450edc7007403b14902ad2c95cd1dd087e7f5f).
+[4dd9283](https://github.com/thegimliproject/GimliToken/commit/4dd9283f18536115cf618d185b384a13cb3403c5),
+[8d450ed](https://github.com/thegimliproject/GimliToken/commit/8d450edc7007403b14902ad2c95cd1dd087e7f5f) and
+[ec5fe87](https://github.com/thegimliproject/GimliToken/commit/ec5fe879f350fcc7936dfb152ed1e9f711429c30).
 
 No potential vulnerabilities have been identified in the crowdsale and token contract.
 
@@ -209,6 +210,12 @@ deducted from.
 * **LOW IMPORTANCE** Increase the minimum Solidity version number from `^0.4.11` to `^0.4.16`. Review the bugfixes in
   the Solidity [releases](https://github.com/ethereum/solidity/releases) list to confirm your target version
   * [x] Gimli will leave the pragma compiler version as 0.4.11, but will deploy with a recent compiler version (check EtherScan)
+* **MEDIUM IMPORTANCE** The locked wallet address for the vesting of tokens was accidentally changed to an account the
+  project team has control of - in commit [6670411](https://github.com/thegimliproject/GimliToken/commit/667041178d3549f0cbc764feecdb351fd24489dd)
+  * [x] Fixed in [ec5fe87](https://github.com/thegimliproject/GimliToken/commit/ec5fe879f350fcc7936dfb152ed1e9f711429c30)
+* **LOW IMPORTANCE** The balance of unsold tokens will be moved into the owner account instead of the multisig account
+  at the end of the crowdsale due to changes prior to commit [6670411](https://github.com/thegimliproject/GimliToken/commit/667041178d3549f0cbc764feecdb351fd24489dd)
+  * [x] Fixed in [ec5fe87](https://github.com/thegimliproject/GimliToken/commit/ec5fe879f350fcc7936dfb152ed1e9f711429c30)
 
 <br />
 
