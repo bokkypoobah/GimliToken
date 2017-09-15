@@ -8,17 +8,17 @@ import "ERC20.sol";
 contract GimliCrowdsale is SafeMath, GimliToken {
 
     address public constant MULTISIG_WALLET_ADDRESS = 0xa22AB8A9D641CE77e06D98b7D7065d324D3d6976;
-    address public constant LOCKED_ADDRESS = 0xabcdefabcdefabcdefabcdefabcdefabcdefabcd;
+    address public constant LOCKED_ADDRESS = 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD;
 
     // crowdsale
     uint256 public constant CROWDSALE_AMOUNT = 80 * MILLION_GML; // Should not include vested amount
-    uint256 public constant START_DATE = 1505031781; // Sun 10 Sep 2017 08:23:01 UTC
-    uint256 public constant END_DATE = 1505031871; // Sun 10 Sep 2017 08:24:31 UTC
+    uint256 public constant START_DATE = 1505497959; // Fri 15 Sep 2017 17:52:39 UTC
+    uint256 public constant END_DATE = 1505498049; // Fri 15 Sep 2017 17:54:09 UTC
     uint256 public constant CROWDSALE_PRICE = 700; // 700 GML / ETH
     uint256 public constant VESTING_1_AMOUNT = 15 * MILLION_GML; // TODO
-    uint256 public constant VESTING_1_DATE = 1505031931; // Sun 10 Sep 2017 08:25:31 UTC
+    uint256 public constant VESTING_1_DATE = 1505498109; // Fri 15 Sep 2017 17:55:09 UTC
     uint256 public constant VESTING_2_AMOUNT = 15 * MILLION_GML; // TODO
-    uint256 public constant VESTING_2_DATE = 1505031991; // Sun 10 Sep 2017 08:26:31 UTC
+    uint256 public constant VESTING_2_DATE = 1505498169; // Fri 15 Sep 2017 17:56:09 UTC
     bool public vesting1Withdrawn = false;
     bool public vesting2Withdrawn = false;
     bool public crowdsaleCanceled = false;
@@ -35,8 +35,7 @@ contract GimliCrowdsale is SafeMath, GimliToken {
 
         // calculate and check quantity
         uint256 quantity = safeDiv(safeMul(msg.value, CROWDSALE_PRICE), 10**(18-uint256(decimals)));
-        if (safeSub(balances[this], quantity) < 0)
-            return;
+        require(safeSub(balances[this], quantity) >= 0);
 
         require(MULTISIG_WALLET_ADDRESS.send(msg.value));
 
@@ -60,9 +59,9 @@ contract GimliCrowdsale is SafeMath, GimliToken {
         // update balances
         if (balances[this] > 0) {
             uint256 amount = balances[this];
-            balances[owner] = safeAdd(balances[owner], amount);
+            balances[MULTISIG_WALLET_ADDRESS] = safeAdd(balances[MULTISIG_WALLET_ADDRESS], amount);
             balances[this] = 0;
-            Transfer(this, owner, amount);
+            Transfer(this, MULTISIG_WALLET_ADDRESS, amount);
         }
     }
 
@@ -114,7 +113,7 @@ contract GimliCrowdsale is SafeMath, GimliToken {
       onlyOwner returns (bool success)
     {
         // can't be used for GIM token
-        require(tokenAddress != address(this));
+        require(tokenAddress != address(this) || transferable);
         return ERC20(tokenAddress).transfer(owner, amount);
     }
 }

@@ -21,17 +21,24 @@ contract GimliCrowdsale is SafeMath, GimliToken {
 
     // BK Next 2 Ok
     address public constant MULTISIG_WALLET_ADDRESS = 0xc79ab28c5c03f1e7fbef056167364e6782f9ff4f;
-    address public constant LOCKED_ADDRESS = 0xabcdefabcdefabcdefabcdefabcdefabcdefabcd;
+    address public constant LOCKED_ADDRESS = 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD;
 
     // crowdsale
-    // BK Next 8 Ok
+    // BK Ok
     uint256 public constant CROWDSALE_AMOUNT = 80 * MILLION_GML; // Should not include vested amount
+    // BK Ok new Date(1505736000 * 1000).toUTCString() => "Mon, 18 Sep 2017 12:00:00 UTC"
     uint256 public constant START_DATE = 1505736000; //  (epoch timestamp)
+    // BK Ok new Date(1508500800 * 1000).toUTCString() => "Fri, 20 Oct 2017 12:00:00 UTC"
     uint256 public constant END_DATE = 1508500800; // TODO (epoch timestamp)
+    // BK Ok
     uint256 public constant CROWDSALE_PRICE = 700; // 700 GML / ETH
+    // BK Ok
     uint256 public constant VESTING_1_AMOUNT = 15 * MILLION_GML; // TODO
+    // BK Ok new Date(1537272000 * 1000).toUTCString() => "Tue, 18 Sep 2018 12:00:00 UTC"
     uint256 public constant VESTING_1_DATE = 1537272000; // TODO (epoch timestamp)
+    // BK Ok
     uint256 public constant VESTING_2_AMOUNT = 15 * MILLION_GML; // TODO
+    // BK Ok new Date(1568808000 * 1000).toUTCString() => "Wed, 18 Sep 2019 12:00:00 UTC"
     uint256 public constant VESTING_2_DATE = 1568808000; // TODO (epoch timestamp)
     // BK Next 2 Ok
     bool public vesting1Withdrawn = false;

@@ -18,7 +18,7 @@ addAccount(eth.accounts[7], "Account #7");
 addAccount(eth.accounts[8], "Account #8");
 addAccount(eth.accounts[9], "Account #9 - Vested 1 Tokens");
 addAccount(eth.accounts[10], "Account #10 - Vested 2 Tokens");
-addAccount("0xabcdefabcdefabcdefabcdefabcdefabcdefabcd", "Locked Tokens");
+addAccount("0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD", "Locked Tokens");
 
 
 var minerAccount = eth.accounts[0];

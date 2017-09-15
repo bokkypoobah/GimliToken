@@ -64,11 +64,11 @@ printf "VESTING2TIME    = '$VESTING2TIME' '$VESTING2TIME_S'\n" | tee -a $TEST1OU
 
 # --- Modify parameters ---
 `perl -pi -e "s/bool transferable/bool public transferable/" $TOKENSOL`
-`perl -pi -e "s/0xd889caA9847F64C77118AD5Ec60291525A3d3939/0xa22AB8A9D641CE77e06D98b7D7065d324D3d6976/" GimliCrowdsale.sol`
-`perl -pi -e "s/START_DATE \= 1400000000;.*$/START_DATE \= $STARTTIME; \/\/ $STARTTIME_S/" GimliCrowdsale.sol`
-`perl -pi -e "s/END_DATE \= 1500000000;.*$/END_DATE \= $ENDTIME; \/\/ $ENDTIME_S/" GimliCrowdsale.sol`
-`perl -pi -e "s/VESTING_1_DATE \= 1600000000;.*$/VESTING_1_DATE \= $VESTING1TIME; \/\/ $VESTING1TIME_S/" GimliCrowdsale.sol`
-`perl -pi -e "s/VESTING_2_DATE \= 1700000000;.*$/VESTING_2_DATE \= $VESTING2TIME; \/\/ $VESTING2TIME_S/" GimliCrowdsale.sol`
+`perl -pi -e "s/MULTISIG_WALLET_ADDRESS \= 0xc79ab28c5c03f1e7fbef056167364e6782f9ff4f;/MULTISIG_WALLET_ADDRESS \= 0xa22AB8A9D641CE77e06D98b7D7065d324D3d6976;/" GimliCrowdsale.sol`
+`perl -pi -e "s/START_DATE = 1505736000;.*$/START_DATE \= $STARTTIME; \/\/ $STARTTIME_S/" GimliCrowdsale.sol`
+`perl -pi -e "s/END_DATE = 1508500800;.*$/END_DATE \= $ENDTIME; \/\/ $ENDTIME_S/" GimliCrowdsale.sol`
+`perl -pi -e "s/VESTING_1_DATE = 1537272000;.*$/VESTING_1_DATE \= $VESTING1TIME; \/\/ $VESTING1TIME_S/" GimliCrowdsale.sol`
+`perl -pi -e "s/VESTING_2_DATE = 1568808000;.*$/VESTING_2_DATE \= $VESTING2TIME; \/\/ $VESTING2TIME_S/" GimliCrowdsale.sol`
 
 DIFFS1=`diff $SOURCEDIR/$TOKENSOL $TOKENSOL`
 echo "--- Differences $SOURCEDIR/$TOKENSOL $TOKENSOL ---" | tee -a $TEST1OUTPUT
@@ -137,8 +137,8 @@ console.log("RESULT: ");
 var preAllocMessage = "Add Preallocations";
 // -----------------------------------------------------------------------------
 console.log("RESULT: " + preAllocMessage);
-var preAlloc1Tx = token.preAllocate(account3, "100000000000", web3.toWei("10", "ether"), {from: wallet, gas: 400000});
-var preAlloc2Tx = token.preAllocate(account4, "1000000000000", web3.toWei("100", "ether"), {from: wallet, gas: 400000});
+var preAlloc1Tx = token.preAllocate(account3, "100000000000", web3.toWei("10", "ether"), {from: contractOwnerAccount, gas: 400000});
+var preAlloc2Tx = token.preAllocate(account4, "1000000000000", web3.toWei("100", "ether"), {from: contractOwnerAccount, gas: 400000});
 while (txpool.status.pending > 0) {
 }
 printTxData("preAlloc1Tx", preAlloc1Tx);
@@ -204,7 +204,7 @@ console.log("RESULT: Waited until end date at " + endTime + " " + endTimeDate + 
 var closeCrowdsaleMessage = "Close Crowdsale";
 // -----------------------------------------------------------------------------
 console.log("RESULT: " + closeCrowdsaleMessage);
-var closeCrowdsaleTx = token.closeCrowdsale({from: wallet, gas: 400000});
+var closeCrowdsaleTx = token.closeCrowdsale({from: contractOwnerAccount, gas: 400000});
 while (txpool.status.pending > 0) {
 }
 printTxData("closeCrowdsaleTx", closeCrowdsaleTx);
@@ -251,7 +251,7 @@ console.log("RESULT: Waited until vesting period 1 end date at " + vesting1EndTi
 var releaseVesting1Message = "Release Vesting 1 Tokens To Account 9";
 // -----------------------------------------------------------------------------
 console.log("RESULT: " + releaseVesting1Message);
-var releaseVesting1Tx = token.releaseVesting(account9, {from: wallet, gas: 400000});
+var releaseVesting1Tx = token.releaseVesting(account9, {from: contractOwnerAccount, gas: 400000});
 while (txpool.status.pending > 0) {
 }
 printTxData("releaseVesting1Tx", releaseVesting1Tx);
@@ -276,7 +276,7 @@ console.log("RESULT: Waited until vesting period 2 end date at " + vesting2EndTi
 var releaseVesting2Message = "Release Vesting 2 Tokens To Account 10";
 // -----------------------------------------------------------------------------
 console.log("RESULT: " + releaseVesting2Message);
-var releaseVesting2Tx = token.releaseVesting(account10, {from: wallet, gas: 400000});
+var releaseVesting2Tx = token.releaseVesting(account10, {from: contractOwnerAccount, gas: 400000});
 while (txpool.status.pending > 0) {
 }
 printTxData("releaseVesting2Tx", releaseVesting2Tx);

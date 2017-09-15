@@ -15,8 +15,9 @@ This audit has been conducted on Gimli's source code in commits
 [5d0eeb2](https://github.com/thegimliproject/GimliToken/commit/5d0eeb2f83d4d12b2dcd9f2bb531da25f057650c),
 [998029f](https://github.com/thegimliproject/GimliToken/commit/998029fa3c7debbbdc903873f407e3d11b9caaab),
 [4dd9283](https://github.com/thegimliproject/GimliToken/commit/4dd9283f18536115cf618d185b384a13cb3403c5),
-[8d450ed](https://github.com/thegimliproject/GimliToken/commit/8d450edc7007403b14902ad2c95cd1dd087e7f5f) and
-[ec5fe87](https://github.com/thegimliproject/GimliToken/commit/ec5fe879f350fcc7936dfb152ed1e9f711429c30).
+[8d450ed](https://github.com/thegimliproject/GimliToken/commit/8d450edc7007403b14902ad2c95cd1dd087e7f5f),
+[ec5fe87](https://github.com/thegimliproject/GimliToken/commit/ec5fe879f350fcc7936dfb152ed1e9f711429c30) and
+[463c668](https://github.com/thegimliproject/GimliToken/commit/463c6686a526c6f1e29a53f9b0bcdbf15e95b355).
 
 No potential vulnerabilities have been identified in the crowdsale and token contract.
 
