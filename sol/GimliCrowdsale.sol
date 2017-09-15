@@ -7,18 +7,18 @@ import "ERC20.sol";
 /// @title Gimli Crowdsale Contract.
 contract GimliCrowdsale is SafeMath, GimliToken {
 
-    address public constant MULTISIG_WALLET_ADDRESS = 0xd889caA9847F64C77118AD5Ec60291525A3d3939;
-    address public constant LOCKED_ADDRESS = 0xabcdefabcdefabcdefabcdefabcdefabcdefabcd;
+    address public constant MULTISIG_WALLET_ADDRESS = 0xc79ab28c5c03f1e7fbef056167364e6782f9ff4f;
+    address public constant LOCKED_ADDRESS = 0xc79ab28c5c03f1e7fbef056167364e6782f9ff4f;
 
     // crowdsale
     uint256 public constant CROWDSALE_AMOUNT = 80 * MILLION_GML; // Should not include vested amount
-    uint256 public constant START_DATE = 1400000000; // TODO (epoch timestamp)
-    uint256 public constant END_DATE = 1500000000; // TODO (epoch timestamp)
+    uint256 public constant START_DATE = 1505736000; //  (epoch timestamp)
+    uint256 public constant END_DATE = 1508500800; // TODO (epoch timestamp)
     uint256 public constant CROWDSALE_PRICE = 700; // 700 GML / ETH
     uint256 public constant VESTING_1_AMOUNT = 15 * MILLION_GML; // TODO
-    uint256 public constant VESTING_1_DATE = 1600000000; // TODO (epoch timestamp)
+    uint256 public constant VESTING_1_DATE = 1537272000; // TODO (epoch timestamp)
     uint256 public constant VESTING_2_AMOUNT = 15 * MILLION_GML; // TODO
-    uint256 public constant VESTING_2_DATE = 1700000000; // TODO (epoch timestamp)
+    uint256 public constant VESTING_2_DATE = 1568808000; // TODO (epoch timestamp)
     bool public vesting1Withdrawn = false;
     bool public vesting2Withdrawn = false;
     bool public crowdsaleCanceled = false;
@@ -35,8 +35,7 @@ contract GimliCrowdsale is SafeMath, GimliToken {
 
         // calculate and check quantity
         uint256 quantity = safeDiv(safeMul(msg.value, CROWDSALE_PRICE), 10**(18-uint256(decimals)));
-        if (safeSub(balances[this], quantity) < 0)
-            return;
+        require(safeSub(balances[this], quantity) >= 0);
 
         require(MULTISIG_WALLET_ADDRESS.send(msg.value));
 
@@ -114,7 +113,7 @@ contract GimliCrowdsale is SafeMath, GimliToken {
       onlyOwner returns (bool success)
     {
         // can't be used for GIM token
-        require(tokenAddress != address(this));
+        require(tokenAddress != address(this) && transferable);
         return ERC20(tokenAddress).transfer(owner, amount);
     }
 }
