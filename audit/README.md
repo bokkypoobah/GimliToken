@@ -19,9 +19,6 @@ This audit has been conducted on Gimli's source code in commits
 
 No potential vulnerabilities have been identified in the crowdsale and token contract.
 
-There is 1 oustanding recommendation, but these are of low importance. The pragma used is 0.4.11 but a recent compiler 
-will be used.
-
 <br />
 
 ### Crowdsale Mainnet Addresses
@@ -75,8 +72,6 @@ deducted from.
   * [Crowdsale Contract](#crowdsale-contract)
   * [Token Contract](#token-contract)
 * [Recommendations](#recommendations)
-  * [Outstanding Recommendations](#outstanding-recommendations)
-  * [Completed Recommendations](#completed-recommendations)
 * [Potential Vulnerabilities](#potential-vulnerabilities)
 * [Scope](#scope)
 * [Limitations](#limitations)
@@ -91,16 +86,6 @@ deducted from.
 <hr />
 
 ## Recommendations
-
-### Outstanding Recommendations
-
-* **LOW IMPORTANCE** Increase the minimum Solidity version number from `^0.4.11` to `^0.4.16`. Review the bugfixes in
-  the Solidity [releases](https://github.com/ethereum/solidity/releases) list to confirm your target version
-  * [x] Gimli will leave the pragma compiler version as 0.4.11, but will deploy with a recent compiler version (check EtherScan)
-
-<br />
-
-### Completed Recommendations
 
 * **HIGH IMPORTANCE** There is no minimum funding goal and no refunds that have to be provided back to the 
   crowdsale participants if the minimum funding goal is not reached. `GimliCrowdsale.function ()` should
@@ -221,6 +206,9 @@ deducted from.
 * **LOW IMPORTANCE** In *Gimli*, `balances[MULTISIG_WALLET_ADDRESS] = safeAdd(balances[owner], TOTAL_SUPPLY - CROWDSALE_AMOUNT - VESTING_1_AMOUNT - VESTING_2_AMOUNT);`
   does not need the `safeAdd(balances[owner]...` or should be `safeAdd(balances[MULTISIG_WALLET_ADDRESS]...`
   * [x] Fixed in [8d450ed](https://github.com/thegimliproject/GimliToken/commit/8d450edc7007403b14902ad2c95cd1dd087e7f5f)
+* **LOW IMPORTANCE** Increase the minimum Solidity version number from `^0.4.11` to `^0.4.16`. Review the bugfixes in
+  the Solidity [releases](https://github.com/ethereum/solidity/releases) list to confirm your target version
+  * [x] Gimli will leave the pragma compiler version as 0.4.11, but will deploy with a recent compiler version (check EtherScan)
 
 <br />
 
