@@ -67,11 +67,8 @@ contract GimliToken is ERC20, SafeMath, Ownable {
         // BK Ok
         require(transferable);
 
-        // BK NOTE - _value can be == 0 but cannot be < 0 as it is an unsigned integer
         // BK Ok
-        if (balances[msg.sender] < _value || _value <= 0)
-            // BK Ok
-            return false;
+        require(balances[msg.sender] >= _value && _value >=0);
 
         // BK Ok
         balances[msg.sender] = safeSub(balances[msg.sender], _value);
@@ -94,12 +91,9 @@ contract GimliToken is ERC20, SafeMath, Ownable {
         // BK Ok
         require(transferable);
 
-        // BK NOTE - _value can be == 0 but cannot be < 0 as it is an unsigned integer
         // BK Ok
-        if (balances[_from] < _value || allowed[_from][msg.sender] < _value || _value <= 0)
-            // BK Ok
-            return false;
-        // BK Ok
+        require(balances[_from] >= _value && allowed[_from][msg.sender] >= _value && _value >= 0);
+
         balances[_from] = safeSub(balances[_from], _value);
         // BK Ok
         balances[_to] = safeAdd(balances[_to], _value);

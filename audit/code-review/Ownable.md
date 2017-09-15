@@ -32,6 +32,12 @@ contract Ownable {
         _;
     }
 
+    // BK Ok - Constructor
+    function Ownable() {
+        // BK Ok
+        owner = msg.sender;
+    }
+
     /// @notice Transfer ownership from `owner` to `newOwner`
     /// @param _newOwner The new contract owner
     // BK Ok - Only the current owner can execute this function

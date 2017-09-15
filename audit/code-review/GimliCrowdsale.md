@@ -20,19 +20,19 @@ import "ERC20.sol";
 contract GimliCrowdsale is SafeMath, GimliToken {
 
     // BK Next 2 Ok
-    address public constant MULTISIG_WALLET_ADDRESS = 0xd889caA9847F64C77118AD5Ec60291525A3d3939;
-    address public constant LOCKED_ADDRESS = 0xabcdefabcdefabcdefabcdefabcdefabcdefabcd;
+    address public constant MULTISIG_WALLET_ADDRESS = 0xc79ab28c5c03f1e7fbef056167364e6782f9ff4f;
+    address public constant LOCKED_ADDRESS = 0xc79ab28c5c03f1e7fbef056167364e6782f9ff4f;
 
     // crowdsale
     // BK Next 8 Ok
     uint256 public constant CROWDSALE_AMOUNT = 80 * MILLION_GML; // Should not include vested amount
-    uint256 public constant START_DATE = 1400000000; // TODO (epoch timestamp)
-    uint256 public constant END_DATE = 1500000000; // TODO (epoch timestamp)
+    uint256 public constant START_DATE = 1505736000; //  (epoch timestamp)
+    uint256 public constant END_DATE = 1508500800; // TODO (epoch timestamp)
     uint256 public constant CROWDSALE_PRICE = 700; // 700 GML / ETH
     uint256 public constant VESTING_1_AMOUNT = 15 * MILLION_GML; // TODO
-    uint256 public constant VESTING_1_DATE = 1600000000; // TODO (epoch timestamp)
+    uint256 public constant VESTING_1_DATE = 1537272000; // TODO (epoch timestamp)
     uint256 public constant VESTING_2_AMOUNT = 15 * MILLION_GML; // TODO
-    uint256 public constant VESTING_2_DATE = 1700000000; // TODO (epoch timestamp)
+    uint256 public constant VESTING_2_DATE = 1568808000; // TODO (epoch timestamp)
     // BK Next 2 Ok
     bool public vesting1Withdrawn = false;
     bool public vesting2Withdrawn = false;
@@ -59,9 +59,7 @@ contract GimliCrowdsale is SafeMath, GimliToken {
         uint256 quantity = safeDiv(safeMul(msg.value, CROWDSALE_PRICE), 10**(18-uint256(decimals)));
         // BK NOTE - Could be written as require(balances[this] >= quantity)
         // BK Ok
-        if (safeSub(balances[this], quantity) < 0)
-            // BK Ok
-            return;
+        require(safeSub(balances[this], quantity) >= 0);
 
         // BK Ok
         require(MULTISIG_WALLET_ADDRESS.send(msg.value));
@@ -171,7 +169,7 @@ contract GimliCrowdsale is SafeMath, GimliToken {
     {
         // can't be used for GIM token
         // BK Ok - This means GIM tokens can be accidentally locked in this token contract
-        require(tokenAddress != address(this));
+        require(tokenAddress != address(this) || transferable);
         // BK Ok
         return ERC20(tokenAddress).transfer(owner, amount);
     }

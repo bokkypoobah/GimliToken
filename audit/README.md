@@ -11,12 +11,16 @@ Bok Consulting Pty Ltd was commissioned to perform an audit on the Ethereum smar
 This audit has been conducted on Gimli's source code in commits
 [18b26f3](https://github.com/thegimliproject/GimliToken/commit/18b26f346bc9a4e393e65f919736c55a210a1371),
 [a4f962f](https://github.com/thegimliproject/GimliToken/commit/a4f962f98672067ef0ff40c87d2d0ecbcd30ae82),
-[baa8715](https://github.com/thegimliproject/GimliToken/commit/baa87152bf587c95c6d4dd2d96acca9db2bdc24c) and
-[5d0eeb2](https://github.com/thegimliproject/GimliToken/commit/5d0eeb2f83d4d12b2dcd9f2bb531da25f057650c).
+[baa8715](https://github.com/thegimliproject/GimliToken/commit/baa87152bf587c95c6d4dd2d96acca9db2bdc24c),
+[5d0eeb2](https://github.com/thegimliproject/GimliToken/commit/5d0eeb2f83d4d12b2dcd9f2bb531da25f057650c),
+[998029f](https://github.com/thegimliproject/GimliToken/commit/998029fa3c7debbbdc903873f407e3d11b9caaab),
+[4dd9283](https://github.com/thegimliproject/GimliToken/commit/4dd9283f18536115cf618d185b384a13cb3403c5) and
+[8d450ed](https://github.com/thegimliproject/GimliToken/commit/8d450edc7007403b14902ad2c95cd1dd087e7f5f).
 
 No potential vulnerabilities have been identified in the crowdsale and token contract.
 
-There are 2 oustanding recommendations, but these are of low importance.
+There is 1 oustanding recommendation, but these are of low importance. The pragma used is 0.4.11 but a recent compiler 
+will be used.
 
 <br />
 
@@ -92,8 +96,7 @@ deducted from.
 
 * **LOW IMPORTANCE** Increase the minimum Solidity version number from `^0.4.11` to `^0.4.16`. Review the bugfixes in
   the Solidity [releases](https://github.com/ethereum/solidity/releases) list to confirm your target version
-* **LOW IMPORTANCE** Can improve `GimliCrowdsale.transferOtherERC20Token(...)` by changing `require(tokenAddress != address(this));` to
-  `require(tokenAddress != address(this) || transferable);`
+  * [x] Gimli will leave the pragma compiler version as 0.4.11, but will deploy with a recent compiler version (check EtherScan)
 
 <br />
 
@@ -212,6 +215,12 @@ deducted from.
   * [x] Fixed in [5d0eeb2](https://github.com/thegimliproject/GimliToken/commit/5d0eeb2f83d4d12b2dcd9f2bb531da25f057650c)
 * **LOW IMPORTANCE** Set `GimliToken.transferable` to be public
   * [x] Fixed in [5d0eeb2](https://github.com/thegimliproject/GimliToken/commit/5d0eeb2f83d4d12b2dcd9f2bb531da25f057650c)
+* **LOW IMPORTANCE** Can improve `GimliCrowdsale.transferOtherERC20Token(...)` by changing `require(tokenAddress != address(this));` to
+  `require(tokenAddress != address(this) || transferable);`
+  * [x] Fixed in [8d450ed](https://github.com/thegimliproject/GimliToken/commit/8d450edc7007403b14902ad2c95cd1dd087e7f5f)
+* **LOW IMPORTANCE** In *Gimli*, `balances[MULTISIG_WALLET_ADDRESS] = safeAdd(balances[owner], TOTAL_SUPPLY - CROWDSALE_AMOUNT - VESTING_1_AMOUNT - VESTING_2_AMOUNT);`
+  does not need the `safeAdd(balances[owner]...` or should be `safeAdd(balances[MULTISIG_WALLET_ADDRESS]...`
+  * [x] Fixed in [8d450ed](https://github.com/thegimliproject/GimliToken/commit/8d450edc7007403b14902ad2c95cd1dd087e7f5f)
 
 <br />
 

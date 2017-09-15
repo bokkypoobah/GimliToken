@@ -29,12 +29,8 @@ contract Gimli is GimliCrowdsale, Administrable {
     /// @notice Gimli Contract constructor. `msg.sender` is the owner.
     // BK Ok - Constructor
     function Gimli() {
-        // BK NOTE - The following comment is incorrect
-        // MULTISIG_WALLET_ADDRESS becomes the owner
-        owner = MULTISIG_WALLET_ADDRESS;
-        // Give the creator initial tokens
-        // BK Ok - Owner has TOTAL_SUPPLY - CROWDSALE_AMOUNT - VESTING_1_AMOUNT - VESTING_2_AMOUNT
-        balances[owner] = safeAdd(balances[owner], TOTAL_SUPPLY - CROWDSALE_AMOUNT - VESTING_1_AMOUNT - VESTING_2_AMOUNT);
+        // Give the multisig wallet initial tokens
+        balances[MULTISIG_WALLET_ADDRESS] = safeAdd(balances[MULTISIG_WALLET_ADDRESS], TOTAL_SUPPLY - CROWDSALE_AMOUNT - VESTING_1_AMOUNT - VESTING_2_AMOUNT);
         // Give the contract crowdsale amount
         // BK Ok - This contract has CROWDSALE_AMOUNT
         balances[this] = CROWDSALE_AMOUNT;
