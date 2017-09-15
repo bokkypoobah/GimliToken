@@ -341,4 +341,4 @@ Details of the testing environment can be found in [test](test).
 
 <br />
 
-Enjoy. (c) BokkyPooBah / Bok Consulting Pty Ltd Sep 12 2017. The MIT Licence.
+Enjoy. (c) BokkyPooBah / Bok Consulting Pty Ltd Sep 16 2017. The MIT Licence.
