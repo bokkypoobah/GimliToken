@@ -1,7 +1,5 @@
 # Gimli Token Contract Audit
 
-Status: Two outstanding recommendations for Gimli to respond to
-
 ## Summary
 
 [Gimli](https://gimli.io/) intends to run a [token launch](https://gimli.io/token-launch/) commencing on September 16 2017.
@@ -16,8 +14,9 @@ This audit has been conducted on Gimli's source code in commits
 [998029f](https://github.com/thegimliproject/GimliToken/commit/998029fa3c7debbbdc903873f407e3d11b9caaab),
 [4dd9283](https://github.com/thegimliproject/GimliToken/commit/4dd9283f18536115cf618d185b384a13cb3403c5),
 [8d450ed](https://github.com/thegimliproject/GimliToken/commit/8d450edc7007403b14902ad2c95cd1dd087e7f5f),
-[ec5fe87](https://github.com/thegimliproject/GimliToken/commit/ec5fe879f350fcc7936dfb152ed1e9f711429c30) and
-[463c668](https://github.com/thegimliproject/GimliToken/commit/463c6686a526c6f1e29a53f9b0bcdbf15e95b355).
+[ec5fe87](https://github.com/thegimliproject/GimliToken/commit/ec5fe879f350fcc7936dfb152ed1e9f711429c30),
+[463c668](https://github.com/thegimliproject/GimliToken/commit/463c6686a526c6f1e29a53f9b0bcdbf15e95b355) and
+[79a7b8a](https://github.com/thegimliproject/GimliToken/commit/79a7b8aecd66f57d5183b8b7563eeb124d96ce19).
 
 No potential vulnerabilities have been identified in the crowdsale and token contract.
 
@@ -341,4 +340,4 @@ Details of the testing environment can be found in [test](test).
 
 <br />
 
-Enjoy. (c) BokkyPooBah / Bok Consulting Pty Ltd Sep 16 2017. The MIT Licence.
+Enjoy. (c) BokkyPooBah / Bok Consulting Pty Ltd Sep 17 2017. The MIT Licence.

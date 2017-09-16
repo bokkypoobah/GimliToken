@@ -1,6 +1,6 @@
  # Account                                             EtherBalanceChange                Token Name
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       25.000000000000000000           0.00000000 Account #0 - Miner
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       60.000000000000000000           0.00000000 Account #0 - Miner
  1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433        0.000000000000000000           0.00000000 Account #1 - Contract Owner
  2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000           0.00000000 Account #2 - Wallet
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.00000000 Account #3 - Prealloc
@@ -18,12 +18,12 @@
 
 
 Deploy Crowdsale/Token Contract
-tokenAddress=0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b gas=6000000 gasUsed=2053200 costETH=0.0369576 costUSD=14.058301464 @ ETH/USD=380.39 gasPrice=18000000000 block=200 txId=0xfe7aef357da3a0f7050035ddfdc1e270ed6da9ce7e9a1f3590e2b76cb9042648
+tokenAddress=0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a gas=6000000 gasUsed=2053264 costETH=0.036958752 costUSD=14.05873967328 @ ETH/USD=380.39 gasPrice=18000000000 block=130 txId=0x2d678cb7b5c6d4a2ebfe7e640a253b471958bb23b302ecb22f072c71385b0a2c
  # Account                                             EtherBalanceChange                Token Name
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       35.036957600000000000           0.00000000 Account #0 - Miner
- 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.036957600000000000           0.00000000 Account #1 - Contract Owner
- 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000    40000000.00000000 Account #2 - Wallet
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       70.036958752000000000           0.00000000 Account #0 - Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.036958752000000000           0.00000000 Account #1 - Contract Owner
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000    30000000.00000000 Account #2 - Wallet
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000           0.00000000 Account #3 - Prealloc
  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000           0.00000000 Account #4 - Prealloc
  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.00000000 Account #5
@@ -32,14 +32,14 @@ tokenAddress=0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b gas=6000000 gasUsed=2053
  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.00000000 Account #8
  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.00000000 Account #9 - Vested 1 Tokens
 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.00000000 Account #10 - Vested 2 Tokens
-11 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD        0.000000000000000000    30000000.00000000 Locked Tokens
-12 0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b        0.000000000000000000    80000000.00000000 Token 'GIM' 'Gimli Token'
+11 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD        0.000000000000000000    40000000.00000000 Locked Tokens
+12 0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a        0.000000000000000000    80000000.00000000 Token 'GIM' 'Gimli Token'
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
                                                                             150000000.00000000 Total Token Balances
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
 
 PASS Deploy Crowdsale/Token Contract
-tokenContractAddress=0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b
+tokenContractAddress=0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a
 token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 token.MULTISIG_WALLET_ADDRESS=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
 token.symbol=GIM
@@ -47,15 +47,15 @@ token.name=Gimli Token
 token.version=v1
 token.decimals=8
 token.totalSupply=150000000
-token.START_DATE=1505497959 Fri, 15 Sep 2017 17:52:39 UTC
-token.END_DATE=1505498049 Fri, 15 Sep 2017 17:54:09 UTC
-token.VESTING_1_DATE=1505498109 Fri, 15 Sep 2017 17:55:09 UTC
-token.VESTING_2_DATE=1505498169 Fri, 15 Sep 2017 17:56:09 UTC
+token.START_DATE=1505600721 Sat, 16 Sep 2017 22:25:21 UTC
+token.END_DATE=1505600811 Sat, 16 Sep 2017 22:26:51 UTC
+token.VESTING_1_DATE=1505600871 Sat, 16 Sep 2017 22:27:51 UTC
+token.VESTING_2_DATE=1505600931 Sat, 16 Sep 2017 22:28:51 UTC
 token.CROWDSALE_PRICE=700
 token.TOTAL_SUPPLY=150000000
 token.CROWDSALE_AMOUNT=80000000
-token.VESTING_1_AMOUNT=15000000
-token.VESTING_2_AMOUNT=15000000
+token.VESTING_1_AMOUNT=10000000
+token.VESTING_2_AMOUNT=30000000
 token.vesting1Withdrawn=false
 token.vesting2Withdrawn=false
 token.crowdsaleCanceled=false
@@ -63,13 +63,13 @@ token.soldAmount=0
 token.transferable=false
 
 Add Preallocations
-preAlloc1Tx gas=400000 gasUsed=92605 costETH=0.00166689 costUSD=0.6340682871 @ ETH/USD=380.39 gasPrice=18000000000 block=203 txId=0x11993f2cdead7d69dabb7cd4ea1425b81380c13ce0de8416c7794bffed63a77c
-preAlloc2Tx gas=400000 gasUsed=62669 costETH=0.001128042 costUSD=0.42909589638 @ ETH/USD=380.39 gasPrice=18000000000 block=203 txId=0xe01f1fde719487ffc5b00337f2867f82ab371a1e120144b14ca64d26d6f36cd7
+preAlloc1Tx gas=400000 gasUsed=92605 costETH=0.00166689 costUSD=0.6340682871 @ ETH/USD=380.39 gasPrice=18000000000 block=132 txId=0x5ff82d6caf2205f8015f0b4a3bad1f78dd7f831c87b78df946a0f4c04a03d8d4
+preAlloc2Tx gas=400000 gasUsed=62669 costETH=0.001128042 costUSD=0.42909589638 @ ETH/USD=380.39 gasPrice=18000000000 block=132 txId=0x364eceedc946c525adaaa2898afd34cacf657def77e79240fcaa692ab22a2a57
  # Account                                             EtherBalanceChange                Token Name
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       55.039752532000000000           0.00000000 Account #0 - Miner
- 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.039752532000000000           0.00000000 Account #1 - Contract Owner
- 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000    40000000.00000000 Account #2 - Wallet
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e       80.039753684000000000           0.00000000 Account #0 - Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.039753684000000000           0.00000000 Account #1 - Contract Owner
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976        0.000000000000000000    30000000.00000000 Account #2 - Wallet
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000        1000.00000000 Account #3 - Prealloc
  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000       10000.00000000 Account #4 - Prealloc
  5 0xa55a151eb00fded1634d27d1127b4be4627079ea        0.000000000000000000           0.00000000 Account #5
@@ -78,15 +78,15 @@ preAlloc2Tx gas=400000 gasUsed=62669 costETH=0.001128042 costUSD=0.42909589638 @
  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.00000000 Account #8
  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.00000000 Account #9 - Vested 1 Tokens
 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.00000000 Account #10 - Vested 2 Tokens
-11 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD        0.000000000000000000    30000000.00000000 Locked Tokens
-12 0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b        0.000000000000000000    79989000.00000000 Token 'GIM' 'Gimli Token'
+11 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD        0.000000000000000000    40000000.00000000 Locked Tokens
+12 0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a        0.000000000000000000    79989000.00000000 Token 'GIM' 'Gimli Token'
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
                                                                             150000000.00000000 Total Token Balances
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
 
 PASS Add Preallocations - ac3 1,000 GIM
 PASS Add Preallocations - ac4 10,000 GIM
-tokenContractAddress=0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b
+tokenContractAddress=0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a
 token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 token.MULTISIG_WALLET_ADDRESS=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
 token.symbol=GIM
@@ -94,32 +94,32 @@ token.name=Gimli Token
 token.version=v1
 token.decimals=8
 token.totalSupply=150000000
-token.START_DATE=1505497959 Fri, 15 Sep 2017 17:52:39 UTC
-token.END_DATE=1505498049 Fri, 15 Sep 2017 17:54:09 UTC
-token.VESTING_1_DATE=1505498109 Fri, 15 Sep 2017 17:55:09 UTC
-token.VESTING_2_DATE=1505498169 Fri, 15 Sep 2017 17:56:09 UTC
+token.START_DATE=1505600721 Sat, 16 Sep 2017 22:25:21 UTC
+token.END_DATE=1505600811 Sat, 16 Sep 2017 22:26:51 UTC
+token.VESTING_1_DATE=1505600871 Sat, 16 Sep 2017 22:27:51 UTC
+token.VESTING_2_DATE=1505600931 Sat, 16 Sep 2017 22:28:51 UTC
 token.CROWDSALE_PRICE=700
 token.TOTAL_SUPPLY=150000000
 token.CROWDSALE_AMOUNT=80000000
-token.VESTING_1_AMOUNT=15000000
-token.VESTING_2_AMOUNT=15000000
+token.VESTING_1_AMOUNT=10000000
+token.VESTING_2_AMOUNT=30000000
 token.vesting1Withdrawn=false
 token.vesting2Withdrawn=false
 token.crowdsaleCanceled=false
 token.soldAmount=11000
 token.transferable=false
-Transfer 0 #203: from=0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b to=0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0 value=1000
-Transfer 1 #203: from=0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b to=0xa44a08d3f6933c69212114bb66e2df1813651844 value=10000
+Transfer 0 #132: from=0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a to=0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0 value=1000
+Transfer 1 #132: from=0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a to=0xa44a08d3f6933c69212114bb66e2df1813651844 value=10000
 
-Waiting until start date at 1505497960 Sat, 16 Sep 2017 03:52:40 AEST currentDate=Sat, 16 Sep 2017 03:51:55 AEST
-Waited until start date at 1505497960 Sat, 16 Sep 2017 03:52:40 AEST currentDate=Sat, 16 Sep 2017 03:52:40 AEST
+Waiting until start date at 1505600722 Sun, 17 Sep 2017 08:25:22 AEST currentDate=Sun, 17 Sep 2017 08:24:32 AEST
+Waited until start date at 1505600722 Sun, 17 Sep 2017 08:25:22 AEST currentDate=Sun, 17 Sep 2017 08:25:22 AEST
 Send Contribution
-sendContribution1Tx gas=400000 gasUsed=51612 costETH=0.000929016 costUSD=0.35338839624 @ ETH/USD=380.39 gasPrice=18000000000 block=219 txId=0x2561763ccbeb920aece1a9af378f3ce58b54990f1c9352f989768394773c252f
+sendContribution1Tx gas=400000 gasUsed=51612 costETH=0.000929016 costUSD=0.35338839624 @ ETH/USD=380.39 gasPrice=18000000000 block=144 txId=0xd62e75e312cfd207e6a2609c6095c2a3a764a5f1e29ac09cf3571c83c3ca50b9
  # Account                                             EtherBalanceChange                Token Name
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e      130.040681548000000000           0.00000000 Account #0 - Miner
- 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.039752532000000000           0.00000000 Account #1 - Contract Owner
- 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976   114270.000000000000000000    40000000.00000000 Account #2 - Wallet
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e      140.040682700000000000           0.00000000 Account #0 - Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.039753684000000000           0.00000000 Account #1 - Contract Owner
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976   114270.000000000000000000    30000000.00000000 Account #2 - Wallet
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000        1000.00000000 Account #3 - Prealloc
  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000       10000.00000000 Account #4 - Prealloc
  5 0xa55a151eb00fded1634d27d1127b4be4627079ea  -114270.000929016000000000    79989000.00000000 Account #5
@@ -128,14 +128,14 @@ sendContribution1Tx gas=400000 gasUsed=51612 costETH=0.000929016 costUSD=0.35338
  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.00000000 Account #8
  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.00000000 Account #9 - Vested 1 Tokens
 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.00000000 Account #10 - Vested 2 Tokens
-11 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD        0.000000000000000000    30000000.00000000 Locked Tokens
-12 0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b        0.000000000000000000           0.00000000 Token 'GIM' 'Gimli Token'
+11 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD        0.000000000000000000    40000000.00000000 Locked Tokens
+12 0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a        0.000000000000000000           0.00000000 Token 'GIM' 'Gimli Token'
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
                                                                             150000000.00000000 Total Token Balances
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
 
 PASS Send Contribution - ac5 114,270 ETH = 80,000,000 GIM
-tokenContractAddress=0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b
+tokenContractAddress=0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a
 token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 token.MULTISIG_WALLET_ADDRESS=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
 token.symbol=GIM
@@ -143,29 +143,29 @@ token.name=Gimli Token
 token.version=v1
 token.decimals=8
 token.totalSupply=150000000
-token.START_DATE=1505497959 Fri, 15 Sep 2017 17:52:39 UTC
-token.END_DATE=1505498049 Fri, 15 Sep 2017 17:54:09 UTC
-token.VESTING_1_DATE=1505498109 Fri, 15 Sep 2017 17:55:09 UTC
-token.VESTING_2_DATE=1505498169 Fri, 15 Sep 2017 17:56:09 UTC
+token.START_DATE=1505600721 Sat, 16 Sep 2017 22:25:21 UTC
+token.END_DATE=1505600811 Sat, 16 Sep 2017 22:26:51 UTC
+token.VESTING_1_DATE=1505600871 Sat, 16 Sep 2017 22:27:51 UTC
+token.VESTING_2_DATE=1505600931 Sat, 16 Sep 2017 22:28:51 UTC
 token.CROWDSALE_PRICE=700
 token.TOTAL_SUPPLY=150000000
 token.CROWDSALE_AMOUNT=80000000
-token.VESTING_1_AMOUNT=15000000
-token.VESTING_2_AMOUNT=15000000
+token.VESTING_1_AMOUNT=10000000
+token.VESTING_2_AMOUNT=30000000
 token.vesting1Withdrawn=false
 token.vesting2Withdrawn=false
 token.crowdsaleCanceled=false
 token.soldAmount=80000000
 token.transferable=false
-Transfer 0 #219: from=0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b to=0xa55a151eb00fded1634d27d1127b4be4627079ea value=79989000
+Transfer 0 #144: from=0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a to=0xa55a151eb00fded1634d27d1127b4be4627079ea value=79989000
 
 Close Crowdsale Early
-closeCrowdsaleTx gas=400000 gasUsed=42661 costETH=0.000767898 costUSD=0.29210072022 @ ETH/USD=380.39 gasPrice=18000000000 block=222 txId=0xc6d277b9200df9f2ad08ccee97f0450d1e8141cc42d3296970c40630b7a460c4
+closeCrowdsaleTx gas=400000 gasUsed=42661 costETH=0.000767898 costUSD=0.29210072022 @ ETH/USD=380.39 gasPrice=18000000000 block=146 txId=0xb3eb6a593c66be8f1cd9c023c00820da9d2f4f438624e8ccb892d3cc4bc3a28e
  # Account                                             EtherBalanceChange                Token Name
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e      145.041449446000000000           0.00000000 Account #0 - Miner
- 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.040520430000000000           0.00000000 Account #1 - Contract Owner
- 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976   114270.000000000000000000    40000000.00000000 Account #2 - Wallet
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e      150.041450598000000000           0.00000000 Account #0 - Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.040521582000000000           0.00000000 Account #1 - Contract Owner
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976   114270.000000000000000000    30000000.00000000 Account #2 - Wallet
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000        1000.00000000 Account #3 - Prealloc
  4 0xa44a08d3f6933c69212114bb66e2df1813651844        0.000000000000000000       10000.00000000 Account #4 - Prealloc
  5 0xa55a151eb00fded1634d27d1127b4be4627079ea  -114270.000929016000000000    79989000.00000000 Account #5
@@ -174,14 +174,14 @@ closeCrowdsaleTx gas=400000 gasUsed=42661 costETH=0.000767898 costUSD=0.29210072
  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           0.00000000 Account #8
  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.00000000 Account #9 - Vested 1 Tokens
 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.00000000 Account #10 - Vested 2 Tokens
-11 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD        0.000000000000000000    30000000.00000000 Locked Tokens
-12 0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b        0.000000000000000000           0.00000000 Token 'GIM' 'Gimli Token'
+11 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD        0.000000000000000000    40000000.00000000 Locked Tokens
+12 0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a        0.000000000000000000           0.00000000 Token 'GIM' 'Gimli Token'
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
                                                                             150000000.00000000 Total Token Balances
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
 
 PASS Close Crowdsale Early
-tokenContractAddress=0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b
+tokenContractAddress=0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a
 token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 token.MULTISIG_WALLET_ADDRESS=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
 token.symbol=GIM
@@ -189,15 +189,15 @@ token.name=Gimli Token
 token.version=v1
 token.decimals=8
 token.totalSupply=150000000
-token.START_DATE=1505497959 Fri, 15 Sep 2017 17:52:39 UTC
-token.END_DATE=1505498049 Fri, 15 Sep 2017 17:54:09 UTC
-token.VESTING_1_DATE=1505498109 Fri, 15 Sep 2017 17:55:09 UTC
-token.VESTING_2_DATE=1505498169 Fri, 15 Sep 2017 17:56:09 UTC
+token.START_DATE=1505600721 Sat, 16 Sep 2017 22:25:21 UTC
+token.END_DATE=1505600811 Sat, 16 Sep 2017 22:26:51 UTC
+token.VESTING_1_DATE=1505600871 Sat, 16 Sep 2017 22:27:51 UTC
+token.VESTING_2_DATE=1505600931 Sat, 16 Sep 2017 22:28:51 UTC
 token.CROWDSALE_PRICE=700
 token.TOTAL_SUPPLY=150000000
 token.CROWDSALE_AMOUNT=80000000
-token.VESTING_1_AMOUNT=15000000
-token.VESTING_2_AMOUNT=15000000
+token.VESTING_1_AMOUNT=10000000
+token.VESTING_2_AMOUNT=30000000
 token.vesting1Withdrawn=false
 token.vesting2Withdrawn=false
 token.crowdsaleCanceled=false
@@ -205,14 +205,14 @@ token.soldAmount=80000000
 token.transferable=true
 
 Move Tokens After Crowdsale Finalised
-moveToken1Tx gas=100000 gasUsed=51773 costETH=0.000931914 costUSD=0.35449076646 @ ETH/USD=380.39 gasPrice=18000000000 block=225 txId=0xeef0166955092089cce4567fedd72847ef76d179de95021dcc9e77b9b5d6582b
-moveToken2Tx gas=100000 gasUsed=45549 costETH=0.000819882 costUSD=0.31187491398 @ ETH/USD=380.39 gasPrice=18000000000 block=225 txId=0xa80f620b5f395e45b7ca9c583e80bb06c7999845276ef40e76bab098c85ea9dd
-moveToken3Tx gas=100000 gasUsed=43396 costETH=0.000781128 costUSD=0.29713327992 @ ETH/USD=380.39 gasPrice=18000000000 block=227 txId=0x6a666d7db36ce67c4ca4be62e26c348e3f38a1db3c76179a32f957ad36458522
+moveToken1Tx gas=100000 gasUsed=51773 costETH=0.000931914 costUSD=0.35449076646 @ ETH/USD=380.39 gasPrice=18000000000 block=148 txId=0xd4042f34c40bfe16c45f031c5a9416f16e4afe49ae24041d9a31922e82ff412d
+moveToken2Tx gas=100000 gasUsed=45549 costETH=0.000819882 costUSD=0.31187491398 @ ETH/USD=380.39 gasPrice=18000000000 block=148 txId=0x077fdca56329769dc93c43a271d06b6a4bdd59eb5cde9783037f646cbf25978e
+moveToken3Tx gas=100000 gasUsed=43396 costETH=0.000781128 costUSD=0.29713327992 @ ETH/USD=380.39 gasPrice=18000000000 block=150 txId=0x3638e8212271e33eeda97bc27e49c45ec9c726bceccf67fd9d9f75570d361f73
  # Account                                             EtherBalanceChange                Token Name
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e      170.043982370000000000           0.00000000 Account #0 - Miner
- 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.040520430000000000           0.00000000 Account #1 - Contract Owner
- 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976   114270.000000000000000000    40000000.00000000 Account #2 - Wallet
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e      170.043983522000000000           0.00000000 Account #0 - Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.040521582000000000           0.00000000 Account #1 - Contract Owner
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976   114270.000000000000000000    30000000.00000000 Account #2 - Wallet
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000        1000.00000000 Account #3 - Prealloc
  4 0xa44a08d3f6933c69212114bb66e2df1813651844       -0.000931914000000000        9999.00000000 Account #4 - Prealloc
  5 0xa55a151eb00fded1634d27d1127b4be4627079ea  -114270.001748898000000000    79988997.00000000 Account #5
@@ -221,8 +221,8 @@ moveToken3Tx gas=100000 gasUsed=43396 costETH=0.000781128 costUSD=0.29713327992 
  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           3.00000000 Account #8
  9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000           0.00000000 Account #9 - Vested 1 Tokens
 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.00000000 Account #10 - Vested 2 Tokens
-11 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD        0.000000000000000000    30000000.00000000 Locked Tokens
-12 0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b        0.000000000000000000           0.00000000 Token 'GIM' 'Gimli Token'
+11 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD        0.000000000000000000    40000000.00000000 Locked Tokens
+12 0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a        0.000000000000000000           0.00000000 Token 'GIM' 'Gimli Token'
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
                                                                             150000000.00000000 Total Token Balances
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
@@ -230,7 +230,7 @@ moveToken3Tx gas=100000 gasUsed=43396 costETH=0.000781128 costUSD=0.29713327992 
 PASS Move Tokens After Crowdsale Finalised - transfer 1 GIM ac4 -> ac6. CHECK for movement
 PASS Move Tokens After Crowdsale Finalised - approve 3 GIM ac5 -> ac7
 PASS Move Tokens After Crowdsale Finalised - transferFrom 3 GIM ac5 -> ac8 by ac7. CHECK for movement
-tokenContractAddress=0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b
+tokenContractAddress=0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a
 token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 token.MULTISIG_WALLET_ADDRESS=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
 token.symbol=GIM
@@ -238,49 +238,49 @@ token.name=Gimli Token
 token.version=v1
 token.decimals=8
 token.totalSupply=150000000
-token.START_DATE=1505497959 Fri, 15 Sep 2017 17:52:39 UTC
-token.END_DATE=1505498049 Fri, 15 Sep 2017 17:54:09 UTC
-token.VESTING_1_DATE=1505498109 Fri, 15 Sep 2017 17:55:09 UTC
-token.VESTING_2_DATE=1505498169 Fri, 15 Sep 2017 17:56:09 UTC
+token.START_DATE=1505600721 Sat, 16 Sep 2017 22:25:21 UTC
+token.END_DATE=1505600811 Sat, 16 Sep 2017 22:26:51 UTC
+token.VESTING_1_DATE=1505600871 Sat, 16 Sep 2017 22:27:51 UTC
+token.VESTING_2_DATE=1505600931 Sat, 16 Sep 2017 22:28:51 UTC
 token.CROWDSALE_PRICE=700
 token.TOTAL_SUPPLY=150000000
 token.CROWDSALE_AMOUNT=80000000
-token.VESTING_1_AMOUNT=15000000
-token.VESTING_2_AMOUNT=15000000
+token.VESTING_1_AMOUNT=10000000
+token.VESTING_2_AMOUNT=30000000
 token.vesting1Withdrawn=false
 token.vesting2Withdrawn=false
 token.crowdsaleCanceled=false
 token.soldAmount=80000000
 token.transferable=true
-Approval 0 #225 owner=0xa55a151eb00fded1634d27d1127b4be4627079ea spender=0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec value=3
-Transfer 0 #225: from=0xa44a08d3f6933c69212114bb66e2df1813651844 to=0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9 value=1
-Transfer 1 #227: from=0xa55a151eb00fded1634d27d1127b4be4627079ea to=0xa88a05d2b88283ce84c8325760b72a64591279a2 value=3
+Approval 0 #148 owner=0xa55a151eb00fded1634d27d1127b4be4627079ea spender=0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec value=3
+Transfer 0 #148: from=0xa44a08d3f6933c69212114bb66e2df1813651844 to=0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9 value=1
+Transfer 1 #150: from=0xa55a151eb00fded1634d27d1127b4be4627079ea to=0xa88a05d2b88283ce84c8325760b72a64591279a2 value=3
 
-Waiting until vesting period 1 end date at 1505498110 Sat, 16 Sep 2017 03:55:10 AEST currentDate=Sat, 16 Sep 2017 03:53:35 AEST
-Waited until vesting period 1 end date at 1505498110 Sat, 16 Sep 2017 03:55:10 AEST currentDate=Sat, 16 Sep 2017 03:55:10 AEST
+Waiting until vesting period 1 end date at 1505600872 Sun, 17 Sep 2017 08:27:52 AEST currentDate=Sun, 17 Sep 2017 08:26:27 AEST
+Waited until vesting period 1 end date at 1505600872 Sun, 17 Sep 2017 08:27:52 AEST currentDate=Sun, 17 Sep 2017 08:27:52 AEST
 Release Vesting 1 Tokens To Account 9
-releaseVesting1Tx gas=400000 gasUsed=56415 costETH=0.00101547 costUSD=0.3862746333 @ ETH/USD=380.39 gasPrice=18000000000 block=252 txId=0x2cb9e02842c12a187976365c31f46027d50f29f9a08cabec1e788659f4176b67
+releaseVesting1Tx gas=400000 gasUsed=56415 costETH=0.00101547 costUSD=0.3862746333 @ ETH/USD=380.39 gasPrice=18000000000 block=177 txId=0xef64636b501f0e99a8d0db7e4ea4e6c754135996f9bc93975c6e782c5617c886
  # Account                                             EtherBalanceChange                Token Name
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e      295.044997840000000000           0.00000000 Account #0 - Miner
- 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.041535900000000000           0.00000000 Account #1 - Contract Owner
- 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976   114270.000000000000000000    40000000.00000000 Account #2 - Wallet
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e      305.044998992000000000           0.00000000 Account #0 - Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.041537052000000000           0.00000000 Account #1 - Contract Owner
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976   114270.000000000000000000    30000000.00000000 Account #2 - Wallet
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000        1000.00000000 Account #3 - Prealloc
  4 0xa44a08d3f6933c69212114bb66e2df1813651844       -0.000931914000000000        9999.00000000 Account #4 - Prealloc
  5 0xa55a151eb00fded1634d27d1127b4be4627079ea  -114270.001748898000000000    79988997.00000000 Account #5
  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           1.00000000 Account #6
  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec       -0.000781128000000000           0.00000000 Account #7
  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           3.00000000 Account #8
- 9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000    15000000.00000000 Account #9 - Vested 1 Tokens
+ 9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000    10000000.00000000 Account #9 - Vested 1 Tokens
 10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000           0.00000000 Account #10 - Vested 2 Tokens
-11 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD        0.000000000000000000    15000000.00000000 Locked Tokens
-12 0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b        0.000000000000000000           0.00000000 Token 'GIM' 'Gimli Token'
+11 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD        0.000000000000000000    30000000.00000000 Locked Tokens
+12 0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a        0.000000000000000000           0.00000000 Token 'GIM' 'Gimli Token'
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
                                                                             150000000.00000000 Total Token Balances
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
 
 PASS Release Vesting 1 Tokens To Account 9
-tokenContractAddress=0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b
+tokenContractAddress=0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a
 token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 token.MULTISIG_WALLET_ADDRESS=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
 token.symbol=GIM
@@ -288,47 +288,47 @@ token.name=Gimli Token
 token.version=v1
 token.decimals=8
 token.totalSupply=150000000
-token.START_DATE=1505497959 Fri, 15 Sep 2017 17:52:39 UTC
-token.END_DATE=1505498049 Fri, 15 Sep 2017 17:54:09 UTC
-token.VESTING_1_DATE=1505498109 Fri, 15 Sep 2017 17:55:09 UTC
-token.VESTING_2_DATE=1505498169 Fri, 15 Sep 2017 17:56:09 UTC
+token.START_DATE=1505600721 Sat, 16 Sep 2017 22:25:21 UTC
+token.END_DATE=1505600811 Sat, 16 Sep 2017 22:26:51 UTC
+token.VESTING_1_DATE=1505600871 Sat, 16 Sep 2017 22:27:51 UTC
+token.VESTING_2_DATE=1505600931 Sat, 16 Sep 2017 22:28:51 UTC
 token.CROWDSALE_PRICE=700
 token.TOTAL_SUPPLY=150000000
 token.CROWDSALE_AMOUNT=80000000
-token.VESTING_1_AMOUNT=15000000
-token.VESTING_2_AMOUNT=15000000
+token.VESTING_1_AMOUNT=10000000
+token.VESTING_2_AMOUNT=30000000
 token.vesting1Withdrawn=true
 token.vesting2Withdrawn=false
 token.crowdsaleCanceled=false
 token.soldAmount=80000000
 token.transferable=true
-Transfer 0 #252: from=0xabcdefabcdefabcdefabcdefabcdefabcdefabcd to=0xa99a0ae3354c06b1459fd441a32a3f71005d7da0 value=15000000
+Transfer 0 #177: from=0xabcdefabcdefabcdefabcdefabcdefabcdefabcd to=0xa99a0ae3354c06b1459fd441a32a3f71005d7da0 value=10000000
 
-Waiting until vesting period 2 end date at 1505498170 Sat, 16 Sep 2017 03:56:10 AEST currentDate=Sat, 16 Sep 2017 03:55:27 AEST
-Waited until vesting period 2 end date at 1505498170 Sat, 16 Sep 2017 03:56:10 AEST currentDate=Sat, 16 Sep 2017 03:56:10 AEST
+Waiting until vesting period 2 end date at 1505600932 Sun, 17 Sep 2017 08:28:52 AEST currentDate=Sun, 17 Sep 2017 08:28:00 AEST
+Waited until vesting period 2 end date at 1505600932 Sun, 17 Sep 2017 08:28:52 AEST currentDate=Sun, 17 Sep 2017 08:28:52 AEST
 Release Vesting 2 Tokens To Account 10
-releaseVesting2Tx gas=400000 gasUsed=41599 costETH=0.000748782 costUSD=0.28482918498 @ ETH/USD=380.39 gasPrice=18000000000 block=267 txId=0xedc1a794ffedbe663054fcd22fdab455914a3c331fe0f6bb1c68f7a2872cf52d
+releaseVesting2Tx gas=400000 gasUsed=41599 costETH=0.000748782 costUSD=0.28482918498 @ ETH/USD=380.39 gasPrice=18000000000 block=201 txId=0x94264ec45723100718e98197d00fed4946ac571eb466adb4b60da80839757bc2
  # Account                                             EtherBalanceChange                Token Name
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
- 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e      370.045746622000000000           0.00000000 Account #0 - Miner
- 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.042284682000000000           0.00000000 Account #1 - Contract Owner
- 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976   114270.000000000000000000    40000000.00000000 Account #2 - Wallet
+ 0 0xa00af22d07c87d96eeeb0ed583f8f6ac7812827e      425.045747774000000000           0.00000000 Account #0 - Miner
+ 1 0xa11aae29840fbb5c86e6fd4cf809eba183aef433       -0.042285834000000000           0.00000000 Account #1 - Contract Owner
+ 2 0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976   114270.000000000000000000    30000000.00000000 Account #2 - Wallet
  3 0xa33a6c312d9ad0e0f2e95541beed0cc081621fd0        0.000000000000000000        1000.00000000 Account #3 - Prealloc
  4 0xa44a08d3f6933c69212114bb66e2df1813651844       -0.000931914000000000        9999.00000000 Account #4 - Prealloc
  5 0xa55a151eb00fded1634d27d1127b4be4627079ea  -114270.001748898000000000    79988997.00000000 Account #5
  6 0xa66a85ede0cbe03694aa9d9de0bb19c99ff55bd9        0.000000000000000000           1.00000000 Account #6
  7 0xa77a2b9d4b1c010a22a7c565dc418cef683dbcec       -0.000781128000000000           0.00000000 Account #7
  8 0xa88a05d2b88283ce84c8325760b72a64591279a2        0.000000000000000000           3.00000000 Account #8
- 9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000    15000000.00000000 Account #9 - Vested 1 Tokens
-10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000    15000000.00000000 Account #10 - Vested 2 Tokens
+ 9 0xa99a0ae3354c06b1459fd441a32a3f71005d7da0        0.000000000000000000    10000000.00000000 Account #9 - Vested 1 Tokens
+10 0xaaaa9de1e6c564446ebca0fd102d8bd92093c756        0.000000000000000000    30000000.00000000 Account #10 - Vested 2 Tokens
 11 0xABcdEFABcdEFabcdEfAbCdefabcdeFABcDEFabCD        0.000000000000000000           0.00000000 Locked Tokens
-12 0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b        0.000000000000000000           0.00000000 Token 'GIM' 'Gimli Token'
+12 0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a        0.000000000000000000           0.00000000 Token 'GIM' 'Gimli Token'
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
                                                                             150000000.00000000 Total Token Balances
 -- ------------------------------------------ --------------------------- -------------------- ---------------------------
 
 PASS Release Vesting 2 Tokens To Account 10
-tokenContractAddress=0x8b97d31ff6bfc0c2fd7a0fff69d6b4bd485a832b
+tokenContractAddress=0x936e75a404fc4ea6aba4d9c3b20ea67abab3188a
 token.owner=0xa11aae29840fbb5c86e6fd4cf809eba183aef433
 token.MULTISIG_WALLET_ADDRESS=0xa22ab8a9d641ce77e06d98b7d7065d324d3d6976
 token.symbol=GIM
@@ -336,19 +336,19 @@ token.name=Gimli Token
 token.version=v1
 token.decimals=8
 token.totalSupply=150000000
-token.START_DATE=1505497959 Fri, 15 Sep 2017 17:52:39 UTC
-token.END_DATE=1505498049 Fri, 15 Sep 2017 17:54:09 UTC
-token.VESTING_1_DATE=1505498109 Fri, 15 Sep 2017 17:55:09 UTC
-token.VESTING_2_DATE=1505498169 Fri, 15 Sep 2017 17:56:09 UTC
+token.START_DATE=1505600721 Sat, 16 Sep 2017 22:25:21 UTC
+token.END_DATE=1505600811 Sat, 16 Sep 2017 22:26:51 UTC
+token.VESTING_1_DATE=1505600871 Sat, 16 Sep 2017 22:27:51 UTC
+token.VESTING_2_DATE=1505600931 Sat, 16 Sep 2017 22:28:51 UTC
 token.CROWDSALE_PRICE=700
 token.TOTAL_SUPPLY=150000000
 token.CROWDSALE_AMOUNT=80000000
-token.VESTING_1_AMOUNT=15000000
-token.VESTING_2_AMOUNT=15000000
+token.VESTING_1_AMOUNT=10000000
+token.VESTING_2_AMOUNT=30000000
 token.vesting1Withdrawn=true
 token.vesting2Withdrawn=true
 token.crowdsaleCanceled=false
 token.soldAmount=80000000
 token.transferable=true
-Transfer 0 #267: from=0xabcdefabcdefabcdefabcdefabcdefabcdefabcd to=0xaaaa9de1e6c564446ebca0fd102d8bd92093c756 value=15000000
+Transfer 0 #201: from=0xabcdefabcdefabcdefabcdefabcdefabcdefabcd to=0xaaaa9de1e6c564446ebca0fd102d8bd92093c756 value=30000000
 
