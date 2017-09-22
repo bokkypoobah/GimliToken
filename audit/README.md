@@ -24,7 +24,9 @@ No potential vulnerabilities have been identified in the crowdsale and token con
 
 ### Crowdsale Mainnet Addresses
 
-`TBA`
+The Gimli crowdsale contract has been deployed to `thegimliproject.eth` or [`0xaE4f56F072c34C0a65B3ae3E4DB797D831439D93`](https://etherscan.io/address/0xaE4f56F072c34C0a65B3ae3E4DB797D831439D93#code).
+
+The crowdsale wallet is at [0xc79ab28c5c03f1e7fbef056167364e6782f9ff4f](https://etherscan.io/address/0xc79ab28c5c03f1e7fbef056167364e6782f9ff4f).
 
 <br />
 
